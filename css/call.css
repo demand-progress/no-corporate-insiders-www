@@ -4,10 +4,12 @@ body {
 }
 
 button,
+form,
 input {
     -webkit-appearance: none;
     border-radius: 0;
     border: none;
+    margin: 0;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -173,19 +175,26 @@ a:hover {
 
 /* Intro animations */
 #app .wrapper > header {
-    animation: fadein 0.312s forwards;
     opacity: 0;
+
+    -webkit-animation: fadein 0.312s forwards;
+            animation: fadein 0.312s forwards;
 }
 #app .wrapper > .form {
-    animation: fadein 0.312s 0.06s forwards;
     opacity: 0;
+
+    -webkit-animation: fadein 0.312s 0.06s forwards;
+            animation: fadein 0.312s 0.06s forwards;
 }
 #app .wrapper > .logos {
-    animation: fadein 0.312s 0.12s forwards;
     opacity: 0;
+
+    -webkit-animation: fadein 0.312s 0.12s forwards;
+            animation: fadein 0.312s 0.12s forwards;
 }
 #app .wrapper > .contact {
-    animation: fadein 0.312s 0.18s forwards;
+    -webkit-animation: fadein 0.312s 0.18s forwards;
+            animation: fadein 0.312s 0.18s forwards;
     opacity: 0;
 }
 
