@@ -15,9 +15,27 @@ input {
     box-sizing: border-box;
 }
 
+a {
+    color: #a82424;
+    text-decoration: none;
+
+    -webkit-transition: color 0.3s;
+            transition: color 0.3s;
+}
+
+a:hover {
+    color: #d23737;
+}
+
 #app {
     color: #090909;
     font-family: 'Open Sans', sans-serif;
+}
+
+#app .please-wait {
+    color: #eee;
+    text-align: center;
+    padding: 32px;
 }
 
 #app .title {
@@ -112,10 +130,6 @@ input {
     font-size: 11px;
 }
 
-#app .privacy a {
-    color: #a82424;
-}
-
 #app .logos {
     background-color: #a82424;
     padding: 32px 16px;
@@ -132,4 +146,46 @@ input {
     max-width: 960px;
     padding: 32px;
     text-align: center;
+}
+
+/* Intro animations */
+#app .wrapper > header {
+    animation: fadein 0.312s forwards;
+    opacity: 0;
+}
+#app .wrapper > .form {
+    animation: fadein 0.312s 0.06s forwards;
+    opacity: 0;
+}
+#app .wrapper > .privacy {
+    animation: fadein 0.312s 0.12s forwards;
+    opacity: 0;
+}
+#app .wrapper > .logos {
+    animation: fadein 0.312s 0.18s forwards;
+    opacity: 0;
+}
+#app .wrapper > .contact {
+    animation: fadein 0.312s 0.24s forwards;
+    opacity: 0;
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
