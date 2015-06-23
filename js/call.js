@@ -132,7 +132,9 @@ var Form = React.createClass({displayName: "Form",
         };
     },
 
-    onClickOptOut: function() {
+    onClickOptOut: function(e) {
+        e.preventDefault();
+        
         this.setState({
             form: 'opt-out',
         });
