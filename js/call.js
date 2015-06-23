@@ -42,7 +42,7 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
         return (
             React.createElement("div", {className: "phone-form"}, 
                 React.createElement("form", {onSubmit:  this.onSubmit}, 
-                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on", type: "number"}), 
+                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on", pattern: "[0-9]*"}), 
                     React.createElement("button", null, 
                         "Connect", 
                         React.createElement("img", {src: "images/phone.svg"})

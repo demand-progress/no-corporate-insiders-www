@@ -42,7 +42,7 @@ var PhoneForm = React.createClass({
         return (
             <div className="phone-form">
                 <form onSubmit={ this.onSubmit }>
-                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" type="number" />
+                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[0-9]*" />
                     <button>
                         Connect
                         <img src="images/phone.svg" />
