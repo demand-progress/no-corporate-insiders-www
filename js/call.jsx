@@ -1,3 +1,5 @@
+var isMobile = /mobile/i.test(navigator.userAgent);
+
 var Header = React.createClass({
     render: function() {
         return (
@@ -19,7 +21,7 @@ var Form = React.createClass({
         return (
             <div className="form">
                 <form onSubmit={ this.onSubmit }>
-                    <input placeholder="Your Phone Number" id="field-phone" />
+                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" />
                     <button>
                         Connect
                         <img src="images/phone.svg" />
@@ -27,6 +29,14 @@ var Form = React.createClass({
                 </form>
             </div>
         );
+    },
+
+    componentDidMount: function() {
+        var phoneField = this.refs['field-phone'].getDOMNode();
+
+        if (!isMobile) {
+            phoneField.focus();
+        }
     },
 
     onSubmit: function(e) {

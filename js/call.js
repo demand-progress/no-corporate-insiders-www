@@ -1,3 +1,5 @@
+var isMobile = /mobile/i.test(navigator.userAgent);
+
 var Header = React.createClass({displayName: "Header",
     render: function() {
         return (
@@ -19,7 +21,7 @@ var Form = React.createClass({displayName: "Form",
         return (
             React.createElement("div", {className: "form"}, 
                 React.createElement("form", {onSubmit:  this.onSubmit}, 
-                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone"}), 
+                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone"}), 
                     React.createElement("button", null, 
                         "Connect", 
                         React.createElement("img", {src: "images/phone.svg"})
@@ -27,6 +29,14 @@ var Form = React.createClass({displayName: "Form",
                 )
             )
         );
+    },
+
+    componentDidMount: function() {
+        var phoneField = this.refs['field-phone'].getDOMNode();
+
+        if (!isMobile) {
+            phoneField.focus();
+        }
     },
 
     onSubmit: function(e) {
