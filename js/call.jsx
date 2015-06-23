@@ -1,4 +1,25 @@
-var isMobile = /mobile/i.test(navigator.userAgent);
+var globals = {};
+globals.isMobile = /mobile/i.test(navigator.userAgent);
+
+var events = {
+    list: {},
+    on: function(event, callback) {
+        if (!this.list[event]) {
+            this.list[event] = [];
+        }
+
+        this.list[event].push(callback);
+    },
+    trigger: function(event, data) {
+        if (!this.list[event]) {
+            return;
+        }
+
+        for (var i = 0; i < this.list[event].length; i++) {
+            this.list[event][i](data);
+        }
+    },
+};
 
 var Header = React.createClass({
     render: function() {
@@ -16,17 +37,23 @@ var Header = React.createClass({
     },
 });
 
-var Form = React.createClass({
+var PhoneForm = React.createClass({
     render: function() {
         return (
-            <div className="form">
+            <div className="phone-form">
                 <form onSubmit={ this.onSubmit }>
-                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" />
+                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" />
                     <button>
                         Connect
                         <img src="images/phone.svg" />
                     </button>
                 </form>
+
+                <div className="privacy">
+                    This tool uses <a href="https://www.twilio.com/legal/privacy" target="_blank">Twilio</a>&apos;s APIs.
+                    <br />
+                    If you prefer not to use our call tool, <a href="#opt-out" onClick={ this.props.onClickOptOut }>click here</a>.
+                </div>
             </div>
         );
     },
@@ -34,7 +61,7 @@ var Form = React.createClass({
     componentDidMount: function() {
         var phoneField = this.refs['field-phone'].getDOMNode();
 
-        if (!isMobile) {
+        if (!globals.isMobile) {
             phoneField.focus();
         }
     },
@@ -45,23 +72,78 @@ var Form = React.createClass({
     },
 });
 
-var LogoCloud = React.createClass({
+var OptOutForm = React.createClass({
     render: function() {
         return (
-            <div className="logos">
-                <img src="images/logos/dp.png" />
+            <div className="opt-out-form">
+                <div className="script">
+                    Tell them: "Lorem ipsum"
+                </div>
+
+                <div className="numbers">
+                    <div className="number">
+                        <div className="name">
+                            John Smith
+                        </div>
+
+                        <div className="phone">
+                            (555) 555-5555
+                        </div>
+                    </div>
+                    
+                    <div className="number">
+                        <div className="name">
+                            John Smith
+                        </div>
+
+                        <div className="phone">
+                            (555) 555-5555
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     },
 });
 
-var Privacy = React.createClass({
+var Form = React.createClass({
+    render: function() {
+        var form;
+        switch (this.state.form) {
+            case 'phone':
+            form = <PhoneForm onClickOptOut={ this.onClickOptOut } />;
+            break;
+
+            case 'opt-out':
+            form = <OptOutForm />;
+            break;
+        }
+
+        return (
+            <div className="form">
+                { form }
+            </div>
+        );
+    },
+
+    getInitialState: function () {
+        return {
+            form: 'phone',
+        };
+    },
+
+    onClickOptOut: function() {
+        this.setState({
+            form: 'opt-out',
+        });
+    },
+});
+
+var LogoCloud = React.createClass({
     render: function() {
         return (
-            <div className="privacy">
-                This tool uses <a href="https://www.twilio.com/legal/privacy" target="_blank">Twilio</a>&apos;s APIs.
-                <br />
-                If you prefer not to use our call tool, <a href="#open-phone-number-modal">click here</a>.
+            <div className="logos">
+                <img src="images/logos/dp.png" />
             </div>
         );
     },
@@ -86,8 +168,6 @@ var CallPages = React.createClass({
                 <Header />
 
                 <Form />
-
-                <Privacy />
 
                 <LogoCloud />
 

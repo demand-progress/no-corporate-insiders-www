@@ -1,4 +1,25 @@
-var isMobile = /mobile/i.test(navigator.userAgent);
+var globals = {};
+globals.isMobile = /mobile/i.test(navigator.userAgent);
+
+var events = {
+    list: {},
+    on: function(event, callback) {
+        if (!this.list[event]) {
+            this.list[event] = [];
+        }
+
+        this.list[event].push(callback);
+    },
+    trigger: function(event, data) {
+        if (!this.list[event]) {
+            return;
+        }
+
+        for (var i = 0; i < this.list[event].length; i++) {
+            this.list[event][i](data);
+        }
+    },
+};
 
 var Header = React.createClass({displayName: "Header",
     render: function() {
@@ -16,16 +37,22 @@ var Header = React.createClass({displayName: "Header",
     },
 });
 
-var Form = React.createClass({displayName: "Form",
+var PhoneForm = React.createClass({displayName: "PhoneForm",
     render: function() {
         return (
-            React.createElement("div", {className: "form"}, 
+            React.createElement("div", {className: "phone-form"}, 
                 React.createElement("form", {onSubmit:  this.onSubmit}, 
-                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone"}), 
+                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on"}), 
                     React.createElement("button", null, 
                         "Connect", 
                         React.createElement("img", {src: "images/phone.svg"})
                     )
+                ), 
+
+                React.createElement("div", {className: "privacy"}, 
+                    "This tool uses ", React.createElement("a", {href: "https://www.twilio.com/legal/privacy", target: "_blank"}, "Twilio"), "'s APIs.", 
+                    React.createElement("br", null), 
+                    "If you prefer not to use our call tool, ", React.createElement("a", {href: "#opt-out", onClick:  this.props.onClickOptOut}, "click here"), "."
                 )
             )
         );
@@ -34,7 +61,7 @@ var Form = React.createClass({displayName: "Form",
     componentDidMount: function() {
         var phoneField = this.refs['field-phone'].getDOMNode();
 
-        if (!isMobile) {
+        if (!globals.isMobile) {
             phoneField.focus();
         }
     },
@@ -45,23 +72,78 @@ var Form = React.createClass({displayName: "Form",
     },
 });
 
-var LogoCloud = React.createClass({displayName: "LogoCloud",
+var OptOutForm = React.createClass({displayName: "OptOutForm",
     render: function() {
         return (
-            React.createElement("div", {className: "logos"}, 
-                React.createElement("img", {src: "images/logos/dp.png"})
+            React.createElement("div", {className: "opt-out-form"}, 
+                React.createElement("div", {className: "script"}, 
+                    "Tell them: \"Lorem ipsum\""
+                ), 
+
+                React.createElement("div", {className: "numbers"}, 
+                    React.createElement("div", {className: "number"}, 
+                        React.createElement("div", {className: "name"}, 
+                            "John Smith"
+                        ), 
+
+                        React.createElement("div", {className: "phone"}, 
+                            "(555) 555-5555"
+                        )
+                    ), 
+                    
+                    React.createElement("div", {className: "number"}, 
+                        React.createElement("div", {className: "name"}, 
+                            "John Smith"
+                        ), 
+
+                        React.createElement("div", {className: "phone"}, 
+                            "(555) 555-5555"
+                        )
+                    )
+                )
             )
         );
     },
 });
 
-var Privacy = React.createClass({displayName: "Privacy",
+var Form = React.createClass({displayName: "Form",
+    render: function() {
+        var form;
+        switch (this.state.form) {
+            case 'phone':
+            form = React.createElement(PhoneForm, {onClickOptOut:  this.onClickOptOut});
+            break;
+
+            case 'opt-out':
+            form = React.createElement(OptOutForm, null);
+            break;
+        }
+
+        return (
+            React.createElement("div", {className: "form"}, 
+                 form 
+            )
+        );
+    },
+
+    getInitialState: function () {
+        return {
+            form: 'phone',
+        };
+    },
+
+    onClickOptOut: function() {
+        this.setState({
+            form: 'opt-out',
+        });
+    },
+});
+
+var LogoCloud = React.createClass({displayName: "LogoCloud",
     render: function() {
         return (
-            React.createElement("div", {className: "privacy"}, 
-                "This tool uses ", React.createElement("a", {href: "https://www.twilio.com/legal/privacy", target: "_blank"}, "Twilio"), "'s APIs.", 
-                React.createElement("br", null), 
-                "If you prefer not to use our call tool, ", React.createElement("a", {href: "#open-phone-number-modal"}, "click here"), "."
+            React.createElement("div", {className: "logos"}, 
+                React.createElement("img", {src: "images/logos/dp.png"})
             )
         );
     },
@@ -86,8 +168,6 @@ var CallPages = React.createClass({displayName: "CallPages",
                 React.createElement(Header, null), 
 
                 React.createElement(Form, null), 
-
-                React.createElement(Privacy, null), 
 
                 React.createElement(LogoCloud, null), 
 
