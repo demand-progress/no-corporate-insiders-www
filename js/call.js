@@ -10,9 +10,18 @@ var CallPages = React.createClass({displayName: "CallPages",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit."
                 ), 
 
-                React.createElement("form", null, 
-                    React.createElement("input", {placeholder: "Your Phone Number"}), 
-                    React.createElement("button", null, "Connect")
+                React.createElement("form", {onSubmit:  this.onSubmit}, 
+                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone"}), 
+                    React.createElement("button", null, 
+                        "Connect", 
+                        React.createElement("img", {src: "images/phone.svg"})
+                    )
+                ), 
+
+                React.createElement("div", {className: "privacy"}, 
+                    "This tool uses ", React.createElement("a", {href: "https://www.twilio.com/legal/privacy", target: "_blank"}, "Twilio"), "'s APIs.", 
+                    React.createElement("br", null), 
+                    "If you prefer not to use our call tool, ", React.createElement("a", {href: "#open-phone-number-modal"}, "click here"), "."
                 ), 
 
                 React.createElement("div", {className: "logos"}, 
@@ -26,6 +35,11 @@ var CallPages = React.createClass({displayName: "CallPages",
                 )
             )
         );
+    },
+
+    onSubmit: function(e) {
+        console.log(e);
+        e.preventDefault();
     },
 });
 
