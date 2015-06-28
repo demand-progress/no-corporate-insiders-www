@@ -37,6 +37,41 @@ var Header = React.createClass({displayName: "Header",
     },
 });
 
+var EmailForm = React.createClass({displayName: "EmailForm",
+    render: function() {
+        return (
+            React.createElement("div", {className: "email-form"}, 
+                React.createElement("form", {onSubmit:  this.onSubmit, ref: "form"}, 
+                    React.createElement("input", {className: "name", placeholder: "Your name"}), 
+                    React.createElement("input", {className: "email", placeholder: "Email"}), 
+                    React.createElement("input", {className: "address", placeholder: "Street address"}), 
+                    React.createElement("input", {className: "zip", placeholder: "Zip code"}), 
+                    React.createElement("button", null, 
+                        "Send Now"
+                    )
+                )
+            )
+        );
+    },
+
+    componentDidMount: function() {
+        var nameField = this.refs.form.getDOMNode().querySelector('.name');
+
+        if (!globals.isMobile) {
+            nameField.focus();
+        }
+    },
+
+    onSubmit: function(e) {
+        e.preventDefault();
+
+        console.log(this.refs.form.getDOMNode());
+        console.log('We should harvest values from fields.');
+
+        this.props.moveToPhoneForm();
+    },
+});
+
 var PhoneForm = React.createClass({displayName: "PhoneForm",
     render: function() {
         return (
@@ -110,6 +145,10 @@ var Form = React.createClass({displayName: "Form",
     render: function() {
         var form;
         switch (this.state.form) {
+            case 'email':
+            form = React.createElement(EmailForm, {moveToPhoneForm:  this.moveToPhoneForm});
+            break;
+
             case 'phone':
             form = React.createElement(PhoneForm, {onClickOptOut:  this.onClickOptOut});
             break;
@@ -128,7 +167,7 @@ var Form = React.createClass({displayName: "Form",
 
     getInitialState: function () {
         return {
-            form: 'phone',
+            form: 'email',
         };
     },
 
@@ -137,6 +176,12 @@ var Form = React.createClass({displayName: "Form",
         
         this.setState({
             form: 'opt-out',
+        });
+    },
+
+    moveToPhoneForm: function(e) {
+        this.setState({
+            form: 'phone',
         });
     },
 });

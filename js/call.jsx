@@ -37,6 +37,41 @@ var Header = React.createClass({
     },
 });
 
+var EmailForm = React.createClass({
+    render: function() {
+        return (
+            <div className="email-form">
+                <form onSubmit={ this.onSubmit } ref="form">
+                    <input className="name" placeholder="Your name" />
+                    <input className="email" placeholder="Email" />
+                    <input className="address" placeholder="Street address" />
+                    <input className="zip" placeholder="Zip code" />
+                    <button>
+                        Send Now
+                    </button>
+                </form>
+            </div>
+        );
+    },
+
+    componentDidMount: function() {
+        var nameField = this.refs.form.getDOMNode().querySelector('.name');
+
+        if (!globals.isMobile) {
+            nameField.focus();
+        }
+    },
+
+    onSubmit: function(e) {
+        e.preventDefault();
+
+        console.log(this.refs.form.getDOMNode());
+        console.log('We should harvest values from fields.');
+
+        this.props.moveToPhoneForm();
+    },
+});
+
 var PhoneForm = React.createClass({
     render: function() {
         return (
@@ -110,6 +145,10 @@ var Form = React.createClass({
     render: function() {
         var form;
         switch (this.state.form) {
+            case 'email':
+            form = <EmailForm moveToPhoneForm={ this.moveToPhoneForm } />;
+            break;
+
             case 'phone':
             form = <PhoneForm onClickOptOut={ this.onClickOptOut } />;
             break;
@@ -128,7 +167,7 @@ var Form = React.createClass({
 
     getInitialState: function () {
         return {
-            form: 'phone',
+            form: 'email',
         };
     },
 
@@ -137,6 +176,12 @@ var Form = React.createClass({
         
         this.setState({
             form: 'opt-out',
+        });
+    },
+
+    moveToPhoneForm: function(e) {
+        this.setState({
+            form: 'phone',
         });
     },
 });
