@@ -57,6 +57,11 @@ function getQueryVariables() {
     return variables;
 }
 
+function getSource() {
+    var source = state.query.source || 'demandprogress';
+    return source.toLowerCase();
+}
+
 function findPos(obj) {
     var curTop = 0;
     if (obj.offsetParent) {
@@ -105,7 +110,7 @@ var EmailForm = React.createClass({displayName: "EmailForm",
                     ), 
 
                     React.createElement("div", {className: "hidden"}, 
-                        React.createElement("input", {type: "hidden", name: "source", value:  this.getSource() })
+                        React.createElement("input", {type: "hidden", name: "source", value:  getSource() })
                     )
                 ), 
 
@@ -129,11 +134,6 @@ var EmailForm = React.createClass({displayName: "EmailForm",
         if (!state.isMobile && !state.isIE) {
             nameField.focus();
         }
-    },
-
-    getSource: function() {
-        var source = state.query.source || 'demandprogress';
-        return source.toLowerCase();
     },
 
     onSubmit: function(e) {
@@ -194,7 +194,7 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
 
         var script = document.createElement('script');
         script.async = true;
-        script.src = 'https://dp-call-congress.herokuapp.com/create?callback=k&campaignId=nomorewallstreetinsiders&userPhone=' + number;
+        script.src = 'https://dp-call-congress.herokuapp.com/create?callback=k&campaignId=nomorewallstreetinsiders&userPhone=' + number + '&source_id=' + getSource();
         document.body.appendChild(script);
 
         this.props.changeForm('script');
