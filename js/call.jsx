@@ -346,12 +346,12 @@ var Form = React.createClass({
     },
 
     changeForm: function(form) {
-        var pos = findPos(this.getDOMNode());
-        scrollTo(0, pos - 16);
-
         this.setState({
             form: form,
         });
+
+        var pos = findPos(this.getDOMNode());
+        scrollTo(0, pos - 16);
     },
 });
 
