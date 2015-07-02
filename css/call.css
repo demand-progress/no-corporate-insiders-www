@@ -18,7 +18,7 @@ input {
 }
 
 a {
-    color: #a82424;
+    color: #09f;
     text-decoration: none;
 
     -webkit-transition: color 0.3s;
@@ -26,7 +26,7 @@ a {
 }
 
 a:hover {
-    color: #d23737;
+    color: #50b9ff;
 }
 
 #app {
@@ -91,7 +91,7 @@ a:hover {
 }
 
 #app .phone-form form button {
-    background-color: #a82424;
+    background-color: #09f;
     color: #fff;
     cursor: pointer;
     font-size: 24px;
@@ -105,7 +105,7 @@ a:hover {
 }
 
 #app .phone-form form button:hover {
-    background-color: #d23737;
+    background-color: #50b9ff;
 }
 
 #app .phone-form form button img {
@@ -173,7 +173,7 @@ a:hover {
 }
 
 #app .email-form form button {
-    background-color: #a82424;
+    background-color: #09f;
     color: #fff;
     cursor: pointer;
     font-size: 24px;
@@ -187,7 +187,7 @@ a:hover {
 }
 
 #app .email-form form button:hover {
-    background-color: #d23737;
+    background-color: #50b9ff;
 }
 
 @media (max-width: 460px) {
@@ -232,7 +232,7 @@ a:hover {
 }
 
 #app .logos {
-    background-color: #a82424;
+    background-color: #09f;
     padding: 32px 16px;
     text-align: center;
 }
