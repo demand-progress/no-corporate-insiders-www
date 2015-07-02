@@ -75,6 +75,17 @@ var EmailForm = React.createClass({
                         <input type="hidden" name="source" value={ this.getSource() } />
                     </div>
                 </form>
+
+                <div className="disclaimer">
+                    We do not share your email address without your permission.
+                    Demand Progress,
+                    Democracy For America,
+                    National People&apos;s Action,
+                    Other 98,
+                    RootsAction, and
+                    Rootstrikers
+                    may send you updates on this and other important campaigns by email. If at any time you would like to unsubscribe from any of these email lists, you may do so.
+                </div>
             </div>
         );
     },
@@ -267,13 +278,31 @@ var Form = React.createClass({
     },
 });
 
-var LogoCloud = React.createClass({
+var Organizations = React.createClass({
     render: function() {
+        var organizations = [];
+        for (var name in this.organizations) {
+            organizations.push(
+                <a href={ this.organizations[name] } target="_blank">
+                    { name }
+                </a>
+            );
+        }
+
         return (
-            <div className="logos">
-                <img src="images/logos/dp.png" />
+            <div className="organizations">
+                { organizations }
             </div>
         );
+    },
+
+    organizations: {
+        'Demand Progress': 'https://demandprogress.org/',
+        'Democracy For America': 'http://democracyforamerica.com/',
+        'National People\'s Action': 'http://npa-us.org/',
+        'Other 98': 'http://other98.com/',
+        'RootsAction': 'http://www.rootsaction.org/',
+        'Rootstrikers': 'http://www.rootstrikers.org/',
     },
 });
 
@@ -297,7 +326,7 @@ var CallPages = React.createClass({
 
                 <Form />
 
-                <LogoCloud />
+                <Organizations />
 
                 <Contact />
             </div>

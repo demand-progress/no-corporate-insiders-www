@@ -74,6 +74,17 @@ var EmailForm = React.createClass({displayName: "EmailForm",
                     React.createElement("div", {className: "hidden"}, 
                         React.createElement("input", {type: "hidden", name: "source", value:  this.getSource() })
                     )
+                ), 
+
+                React.createElement("div", {className: "disclaimer"}, 
+                    "We do not share your email address without your permission." + ' ' +
+                    "Demand Progress," + ' ' +
+                    "Democracy For America," + ' ' +
+                    "National People's Action," + ' ' +
+                    "Other 98," + ' ' +
+                    "RootsAction, and" + ' ' +
+                    "Rootstrikers" + ' ' +
+                    "may send you updates on this and other important campaigns by email. If at any time you would like to unsubscribe from any of these email lists, you may do so."
                 )
             )
         );
@@ -267,13 +278,31 @@ var Form = React.createClass({displayName: "Form",
     },
 });
 
-var LogoCloud = React.createClass({displayName: "LogoCloud",
+var Organizations = React.createClass({displayName: "Organizations",
     render: function() {
+        var organizations = [];
+        for (var name in this.organizations) {
+            organizations.push(
+                React.createElement("a", {href:  this.organizations[name], target: "_blank"}, 
+                     name 
+                )
+            );
+        }
+
         return (
-            React.createElement("div", {className: "logos"}, 
-                React.createElement("img", {src: "images/logos/dp.png"})
+            React.createElement("div", {className: "organizations"}, 
+                 organizations 
             )
         );
+    },
+
+    organizations: {
+        'Demand Progress': 'https://demandprogress.org/',
+        'Democracy For America': 'http://democracyforamerica.com/',
+        'National People\'s Action': 'http://npa-us.org/',
+        'Other 98': 'http://other98.com/',
+        'RootsAction': 'http://www.rootsaction.org/',
+        'Rootstrikers': 'http://www.rootstrikers.org/',
     },
 });
 
@@ -297,7 +326,7 @@ var CallPages = React.createClass({displayName: "CallPages",
 
                 React.createElement(Form, null), 
 
-                React.createElement(LogoCloud, null), 
+                React.createElement(Organizations, null), 
 
                 React.createElement(Contact, null)
             )

@@ -199,6 +199,16 @@ a:hover {
     background-color: #50b9ff;
 }
 
+#app .email-form .disclaimer {
+    color: #808080;
+    font-size: 12px;
+    font-style: italic;
+    margin: 32px auto;
+    max-width: 460px;
+    padding: 0 32px;
+    text-align: center;
+}
+
 @media (max-width: 460px) {
     #app .email-form form input {
         border-bottom: 1px solid #ccc;
@@ -240,14 +250,21 @@ a:hover {
     font-size: 11px;
 }
 
-#app .logos {
+#app .organizations {
     background-color: #09f;
     padding: 32px 16px;
     text-align: center;
 }
 
-#app .logos img {
+#app .organizations a {
+    color: #fff;
+    display: block;
+    margin: 0 auto;
     max-width: 268px;
+}
+
+#app .organizations a:hover {
+    text-decoration: underline;
 }
 
 #app .contact {
@@ -271,7 +288,7 @@ a:hover {
     -webkit-animation: fadein 0.312s 0.06s forwards;
             animation: fadein 0.312s 0.06s forwards;
 }
-#app .wrapper > .logos {
+#app .wrapper > .organizations {
     opacity: 0;
 
     -webkit-animation: fadein 0.312s 0.12s forwards;
