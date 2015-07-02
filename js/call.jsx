@@ -121,7 +121,7 @@ var Header = React.createClass({
                     The results have been predictably dire: “get out of jail free” waivers to banks that break the law, repeatedly delaying key rules required by the Dodd-Frank Wall Street reform bill, and deadlocking the SEC with innumerable conflicts of interest.
                     <div className="spacer" />
 
-                    President Obama can’t make this mistake again – and there are two more openings at the SEC. Sign the petition: tell President Obama to nominate commissioners to the SEC who aren’t afraid to be tough on Wall Street criminals.
+                    President Obama can’t make this mistake again – and there are two more openings at the SEC. <strong>Sign the petition: Tell President Obama to nominate SEC commissioners who aren’t afraid to be tough on Wall Street criminals.</strong>
                 </div>
             </header>
         );
@@ -213,10 +213,10 @@ var PhoneForm = React.createClass({
         return (
             <div className="phone-form">
                 <form onSubmit={ this.onSubmit }>
-                    <h2>Thanks – we’ll deliver your letter to the White House</h2>
+                    <h2>Thanks – we’ll deliver your petition to the White House</h2>
 
                     <div className="request">
-                        Will you make a call to tell the White House to give us a tough “cop on the beat” on Wall Street? Making a phone call is even more effective than sending a letter. We’ll connect you and give you a script. It’ll just take a moment – and it could mean a crackdown on Wall Street’s reckless behavior.
+                        Will you make a call to tell the White House to give us a tough “cop on the beat” on Wall Street? Making a phone call is even more effective than signing a petition. We’ll connect you and give you a script. It’ll just take a moment – and it could mean a crackdown on Wall Street’s reckless behavior.
                     </div>
 
                     <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[\d\(\)\-\+ ]*" />
