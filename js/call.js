@@ -52,7 +52,7 @@ var Header = React.createClass({displayName: "Header",
                     "The results have been predictably dire: “get out of jail free” waivers to banks that break the law, repeatedly delaying key rules required by the Dodd-Frank Wall Street reform bill, and deadlocking the SEC with innumerable conflicts of interest.", 
                     React.createElement("div", {className: "spacer"}), 
 
-                    "President Obama can't make this mistake again – and there are two more openings at the SEC. Sign the petition: tell President Obama to nominate commissioners to the SEC who aren't afraid to be tough on Wall Street criminals."
+                    "President Obama can’t make this mistake again – and there are two more openings at the SEC. Sign the petition: tell President Obama to nominate commissioners to the SEC who aren’t afraid to be tough on Wall Street criminals."
                 )
             )
         );
@@ -80,7 +80,7 @@ var EmailForm = React.createClass({displayName: "EmailForm",
                     "We do not share your email address without your permission." + ' ' +
                     "Demand Progress," + ' ' +
                     "Democracy For America," + ' ' +
-                    "National People's Action," + ' ' +
+                    "National People’s Action," + ' ' +
                     "Other 98," + ' ' +
                     "RootsAction, and" + ' ' +
                     "Rootstrikers" + ' ' +
@@ -126,7 +126,7 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
                 ), 
 
                 React.createElement("div", {className: "privacy"}, 
-                    "This tool uses ", React.createElement("a", {href: "https://www.twilio.com/legal/privacy", target: "_blank"}, "Twilio"), "'s APIs.", 
+                    "This tool uses ", React.createElement("a", {href: "https://www.twilio.com/legal/privacy", target: "_blank"}, "Twilio"), "’s APIs.", 
                     React.createElement("br", null), 
                     "If you prefer not to use our call tool, ", React.createElement("a", {href: "#opt-out", onClick:  this.props.onClickOptOut}, "click here"), "."
                 )
@@ -145,7 +145,7 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
     onSubmit: function(e) {
         e.preventDefault();
 
-        this.props.changeForm('thanks');
+        this.props.changeForm('script');
     },
 });
 
@@ -208,6 +208,26 @@ var OptOutForm = React.createClass({displayName: "OptOutForm",
     },
 });
 
+var PhoneScript = React.createClass({displayName: "PhoneScript",
+    render: function() {
+        return (
+            React.createElement("div", {className: "phone-script"}, 
+                React.createElement("h2", null, "We’re calling you now"), 
+
+                "We’ll connect you to a key decision-maker at the White House. Don’t hang up after the call – each additional call will magnify your impact. Here’s what you can say:", 
+                React.createElement("div", {className: "spacer"}), 
+
+                React.createElement("div", {className: "suggestion"}, 
+                    "“It’s outrageous that the White House is considering naming more Wall Street insiders to the SEC. We need tough ‘cops on the beat’ who will enforce the laws on the big banks, not revolving door picks who will let Wall Street off the hook. President Obama must not name a Wall Street insider like Keir Gumbs or Anne Small to the SEC.”"
+                ), 
+                React.createElement("div", {className: "spacer"}), 
+
+                "If you’re able to make more calls after you’re done, you’ll have an even bigger impact. Just stay on the line and we’ll connect with another decision-maker!"
+            )
+        );
+    },
+});
+
 var Thanks = React.createClass({displayName: "Thanks",
     render: function() {
         return (
@@ -239,6 +259,10 @@ var Form = React.createClass({displayName: "Form",
 
             case 'phone':
             form = React.createElement(PhoneForm, {changeForm:  this.changeForm, onClickOptOut:  this.onClickOptOut});
+            break;
+
+            case 'script':
+            form = React.createElement(PhoneScript, null);
             break;
 
             case 'thanks':

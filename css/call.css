@@ -135,6 +135,37 @@ a:hover {
             transform: translate3d(0, 0, 0) rotate(6deg);
 }
 
+#app .phone-script {
+    border: 5px solid #411;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.216);
+    margin: 0 auto 32px;
+    max-width: 440px;
+    padding: 32px;
+    text-align: center;
+
+    -webkit-transition: box-shadow 0.3s;
+            transition: box-shadow 0.3s;
+}
+
+#app .phone-script:hover {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.216);
+}
+
+#app .phone-script h2 {
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+}
+
+#app .phone-script .suggestion {
+    font-weight: 600;
+    color: #09f;
+}
+
+#app .phone-script .spacer {
+    padding: 0 0 16px;
+}
+
 #app .thanks {
     font-size: 24px;
     padding: 0 0 32px;
@@ -245,9 +276,11 @@ a:hover {
 }
 
 #app .privacy {
-    text-align: center;
+    color: #808080;
+    font-size: 12px;
+    font-style: italic;
     padding: 0 0 32px;
-    font-size: 11px;
+    text-align: center;
 }
 
 #app .organizations {
