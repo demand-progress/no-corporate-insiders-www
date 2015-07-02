@@ -168,7 +168,7 @@ var OptOutForm = React.createClass({
         'The Domestic Policy Council': '202-456-6515',
         'The Office of Administration': '202-456-2861',
         'The Council of Economic Advisers': '202-395-5084',
-        'The White House Comment Line': '202-456-1111',
+        // 'The White House Comment Line': '202-456-1111',
     },
 
     renderNumbers: function() {
