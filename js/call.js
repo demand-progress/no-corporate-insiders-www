@@ -451,7 +451,7 @@ var Contact = React.createClass({displayName: "Contact",
             React.createElement("div", {className: "contact"}, 
                 "For press inquiries, please contact us at:", 
                 React.createElement("br", null), 
-                React.createElement("a", {href: "tel:202-681-7582"}, "202-681-7582"), " or ", React.createElement("a", {href: "mailto:press@demandprogress.org"}, "press@demandprogress.org")
+                React.createElement("a", {href: "tel:202-630-0299"}, "202-630-0299"), " or ", React.createElement("a", {href: "mailto:press@rootstrikers.org"}, "press@rootstrikers.org")
             )
         );
     },

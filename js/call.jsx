@@ -451,7 +451,7 @@ var Contact = React.createClass({
             <div className="contact">
                 For press inquiries, please contact us at:
                 <br />
-                <a href="tel:202-681-7582">202-681-7582</a> or <a href="mailto:press@demandprogress.org">press@demandprogress.org</a>
+                <a href="tel:202-630-0299">202-630-0299</a> or <a href="mailto:press@rootstrikers.org">press@rootstrikers.org</a>
             </div>
         );
     },
