@@ -278,6 +278,17 @@ var CallPages = React.createClass({
             </div>
         );
     },
+
+    imagesToPreload: [
+        'images/phone.svg',
+    ],
+
+    componentDidMount: function() {
+        for (var i = 0; i < this.imagesToPreload.length; i++) {
+            var image = new Image();
+            image.src = this.imagesToPreload[i];
+        }
+    },
 });
 
 React.render(<CallPages />, document.getElementById('app'));
