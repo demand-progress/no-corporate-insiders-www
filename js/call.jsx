@@ -37,6 +37,8 @@ function getQueryVariables() {
     return variables;
 }
 
+function k() {}
+
 var Header = React.createClass({
     render: function() {
         return (
@@ -155,7 +157,7 @@ var PhoneForm = React.createClass({
 
         var script = document.createElement('script');
         script.async = true;
-        script.src = 'https://dp-call-congress.herokuapp.com/create?campaignId=nomorewallstreetinsiders&userPhone=' + number;
+        script.src = 'https://dp-call-congress.herokuapp.com/create?callback=k&campaignId=nomorewallstreetinsiders&userPhone=' + number;
         document.body.appendChild(script);
 
         this.props.changeForm('script');
