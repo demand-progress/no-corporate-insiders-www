@@ -64,10 +64,9 @@ var EmailForm = React.createClass({
         return (
             <div className="email-form">
                 <form onSubmit={ this.onSubmit } ref="form">
-                    <input className="name" placeholder="Your name" />
-                    <input className="email" placeholder="Email" />
-                    <input className="address" placeholder="Street address" />
-                    <input className="zip" placeholder="Zip code" />
+                    <input className="name" name="name" placeholder="Your name" />
+                    <input className="email" name="email" placeholder="Email" />
+                    <input className="zip" name="zip" placeholder="Zip code" />
                     <button>
                         Send Now
                     </button>
@@ -99,7 +98,7 @@ var EmailForm = React.createClass({
         console.log(this.refs.form.getDOMNode());
         console.log('We should harvest values from fields.');
 
-        this.props.moveToPhoneForm();
+        this.props.changeForm('phone');
     },
 });
 
@@ -108,7 +107,7 @@ var PhoneForm = React.createClass({
         return (
             <div className="phone-form">
                 <form onSubmit={ this.onSubmit }>
-                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[0-9]*" />
+                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[0-9()-]*" />
                     <button>
                         Connect
                         <img src="images/phone.svg" />
@@ -134,7 +133,8 @@ var PhoneForm = React.createClass({
 
     onSubmit: function(e) {
         e.preventDefault();
-        console.log(e);
+
+        this.props.changeForm('thanks');
     },
 });
 
@@ -197,16 +197,41 @@ var OptOutForm = React.createClass({
     },
 });
 
+var Thanks = React.createClass({
+    render: function() {
+        return (
+            <div className="thanks">
+                Thanks for making your voice heard!
+
+                <div className="social">
+                    <div className="facebook">
+                    </div>
+
+                    <div className="twitter">
+                    </div>
+
+                    <div className="email">
+                    </div>
+                </div>
+            </div>
+        );
+    },
+});
+
 var Form = React.createClass({
     render: function() {
         var form;
         switch (this.state.form) {
             case 'email':
-            form = <EmailForm moveToPhoneForm={ this.moveToPhoneForm } />;
+            form = <EmailForm changeForm={ this.changeForm } />;
             break;
 
             case 'phone':
-            form = <PhoneForm onClickOptOut={ this.onClickOptOut } />;
+            form = <PhoneForm changeForm={ this.changeForm } onClickOptOut={ this.onClickOptOut } />;
+            break;
+
+            case 'thanks':
+            form = <Thanks />;
             break;
 
             case 'opt-out':
@@ -235,9 +260,9 @@ var Form = React.createClass({
         });
     },
 
-    moveToPhoneForm: function(e) {
+    changeForm: function(form) {
         this.setState({
-            form: 'phone',
+            form: form,
         });
     },
 });

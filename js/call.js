@@ -64,10 +64,9 @@ var EmailForm = React.createClass({displayName: "EmailForm",
         return (
             React.createElement("div", {className: "email-form"}, 
                 React.createElement("form", {onSubmit:  this.onSubmit, ref: "form"}, 
-                    React.createElement("input", {className: "name", placeholder: "Your name"}), 
-                    React.createElement("input", {className: "email", placeholder: "Email"}), 
-                    React.createElement("input", {className: "address", placeholder: "Street address"}), 
-                    React.createElement("input", {className: "zip", placeholder: "Zip code"}), 
+                    React.createElement("input", {className: "name", name: "name", placeholder: "Your name"}), 
+                    React.createElement("input", {className: "email", name: "email", placeholder: "Email"}), 
+                    React.createElement("input", {className: "zip", name: "zip", placeholder: "Zip code"}), 
                     React.createElement("button", null, 
                         "Send Now"
                     ), 
@@ -99,7 +98,7 @@ var EmailForm = React.createClass({displayName: "EmailForm",
         console.log(this.refs.form.getDOMNode());
         console.log('We should harvest values from fields.');
 
-        this.props.moveToPhoneForm();
+        this.props.changeForm('phone');
     },
 });
 
@@ -108,7 +107,7 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
         return (
             React.createElement("div", {className: "phone-form"}, 
                 React.createElement("form", {onSubmit:  this.onSubmit}, 
-                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on", pattern: "[0-9]*"}), 
+                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on", pattern: "[0-9()-]*"}), 
                     React.createElement("button", null, 
                         "Connect", 
                         React.createElement("img", {src: "images/phone.svg"})
@@ -134,7 +133,8 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
 
     onSubmit: function(e) {
         e.preventDefault();
-        console.log(e);
+
+        this.props.changeForm('thanks');
     },
 });
 
@@ -197,16 +197,41 @@ var OptOutForm = React.createClass({displayName: "OptOutForm",
     },
 });
 
+var Thanks = React.createClass({displayName: "Thanks",
+    render: function() {
+        return (
+            React.createElement("div", {className: "thanks"}, 
+                "Thanks for making your voice heard!", 
+
+                React.createElement("div", {className: "social"}, 
+                    React.createElement("div", {className: "facebook"}
+                    ), 
+
+                    React.createElement("div", {className: "twitter"}
+                    ), 
+
+                    React.createElement("div", {className: "email"}
+                    )
+                )
+            )
+        );
+    },
+});
+
 var Form = React.createClass({displayName: "Form",
     render: function() {
         var form;
         switch (this.state.form) {
             case 'email':
-            form = React.createElement(EmailForm, {moveToPhoneForm:  this.moveToPhoneForm});
+            form = React.createElement(EmailForm, {changeForm:  this.changeForm});
             break;
 
             case 'phone':
-            form = React.createElement(PhoneForm, {onClickOptOut:  this.onClickOptOut});
+            form = React.createElement(PhoneForm, {changeForm:  this.changeForm, onClickOptOut:  this.onClickOptOut});
+            break;
+
+            case 'thanks':
+            form = React.createElement(Thanks, null);
             break;
 
             case 'opt-out':
@@ -235,9 +260,9 @@ var Form = React.createClass({displayName: "Form",
         });
     },
 
-    moveToPhoneForm: function(e) {
+    changeForm: function(form) {
         this.setState({
-            form: 'phone',
+            form: form,
         });
     },
 });
