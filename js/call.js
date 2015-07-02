@@ -1,5 +1,7 @@
-var globals = {};
-globals.isMobile = /mobile/i.test(navigator.userAgent);
+var state = {};
+state.isMobile = /mobile/i.test(navigator.userAgent);
+state.campaign = 'no_more_wall_street_insiders';
+state.query = getQueryVariables();
 
 var events = {
     list: {},
@@ -20,6 +22,20 @@ var events = {
         }
     },
 };
+
+function getQueryVariables() {
+    var variables = {};
+
+    var queryString = location.search.substr(1);
+    var pairs = queryString.split('&');
+
+    for (var i = 0; i < pairs.length; i++) {
+        var keyValue = pairs[i].split('=');
+        variables[keyValue[0]] = keyValue[1];
+    }
+
+    return variables;
+}
 
 var Header = React.createClass({displayName: "Header",
     render: function() {
@@ -48,6 +64,10 @@ var EmailForm = React.createClass({displayName: "EmailForm",
                     React.createElement("input", {className: "zip", placeholder: "Zip code"}), 
                     React.createElement("button", null, 
                         "Send Now"
+                    ), 
+
+                    React.createElement("div", {className: "hidden"}, 
+                        React.createElement("input", {type: "hidden", name: "source", value:  this.getSource() })
                     )
                 )
             )
@@ -57,9 +77,14 @@ var EmailForm = React.createClass({displayName: "EmailForm",
     componentDidMount: function() {
         var nameField = this.refs.form.getDOMNode().querySelector('.name');
 
-        if (!globals.isMobile) {
+        if (!state.isMobile) {
             nameField.focus();
         }
+    },
+
+    getSource: function() {
+        var source = state.query.source || 'demandprogress';
+        return source.toLowerCase();
     },
 
     onSubmit: function(e) {
@@ -96,7 +121,7 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
     componentDidMount: function() {
         var phoneField = this.refs['field-phone'].getDOMNode();
 
-        if (!globals.isMobile) {
+        if (!state.isMobile) {
             phoneField.focus();
         }
     },
@@ -173,7 +198,7 @@ var Form = React.createClass({displayName: "Form",
 
     onClickOptOut: function(e) {
         e.preventDefault();
-        
+
         this.setState({
             form: 'opt-out',
         });
