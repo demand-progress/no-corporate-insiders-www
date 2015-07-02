@@ -216,7 +216,7 @@ var OptOutForm = React.createClass({
                     </div>
 
                     <div className="phone">
-                        { number }
+                        <a href={ 'tel:' + number }>{ number }</a>
                     </div>
                 </div>
             );
