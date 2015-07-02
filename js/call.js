@@ -1,6 +1,6 @@
 // Check for outdated browsers.
 (function() {
-    var isIE = navigator.userAgent.match(/MSIE (\d+)\./);
+    var isIE = /MSIE (\d+)\./.test(navigator.userAgent);
     if (isIE) {
         var version = +isIE[1];
         if (version < 10) {
@@ -8,7 +8,7 @@
         }
     }
 
-    if (navigator.userAgent.match(/Android 2\.3/)) {
+    if (/Android 2\.3/.test(navigator.userAgent)) {
         alert('Unfortunately your browser, Android 2.3, is not supported.\nPlease visit the site with a modern browser like Firefox or Chrome.\nThanks!');
     }
 })();
@@ -204,6 +204,7 @@ var EmailForm = React.createClass({displayName: "EmailForm",
         data.append('name', name.value.trim());
         data.append('optedIn', true);
         data.append('source', getSource());
+        data.append('userAgent', navigator.userAgent);
         data.append('zip', zip.value.trim());
         ajax.post('https://dp-flexible-signature-db.herokuapp.com/sign', data);
 
