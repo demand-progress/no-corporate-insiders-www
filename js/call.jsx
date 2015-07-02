@@ -214,7 +214,7 @@ var PhoneScript = React.createClass({
             <div className="phone-script">
                 <h2>We’re calling you now</h2>
 
-                We’ll connect you to a key decision-maker at the White House. Don’t hang up after the call – each additional call will magnify your impact. Here’s what you can say:
+                We’ll connect you to a key decision-maker at the White House. Don’t hang up after the call. Just press <strong>* (star)</strong> and we’ll connect you with another decision-maker. Each additional call will magnify your impact. Here’s what you can say:
                 <div className="spacer" />
 
                 <div className="suggestion">
@@ -222,7 +222,7 @@ var PhoneScript = React.createClass({
                 </div>
                 <div className="spacer" />
 
-                If you’re able to make more calls after you’re done, you’ll have an even bigger impact. Just stay on the line and we’ll connect with another decision-maker!
+                If you’re able to make more calls after you’re done, you’ll have an even bigger impact. Just press <strong>* (star)</strong> and we’ll connect you with another decision-maker!
             </div>
         );
     },

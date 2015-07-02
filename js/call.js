@@ -214,7 +214,7 @@ var PhoneScript = React.createClass({displayName: "PhoneScript",
             React.createElement("div", {className: "phone-script"}, 
                 React.createElement("h2", null, "We’re calling you now"), 
 
-                "We’ll connect you to a key decision-maker at the White House. Don’t hang up after the call – each additional call will magnify your impact. Here’s what you can say:", 
+                "We’ll connect you to a key decision-maker at the White House. Don’t hang up after the call. Just press ", React.createElement("strong", null, "* (star)"), " and we’ll connect you with another decision-maker. Each additional call will magnify your impact. Here’s what you can say:", 
                 React.createElement("div", {className: "spacer"}), 
 
                 React.createElement("div", {className: "suggestion"}, 
@@ -222,7 +222,7 @@ var PhoneScript = React.createClass({displayName: "PhoneScript",
                 ), 
                 React.createElement("div", {className: "spacer"}), 
 
-                "If you’re able to make more calls after you’re done, you’ll have an even bigger impact. Just stay on the line and we’ll connect with another decision-maker!"
+                "If you’re able to make more calls after you’re done, you’ll have an even bigger impact. Just press ", React.createElement("strong", null, "* (star)"), " and we’ll connect you with another decision-maker!"
             )
         );
     },
