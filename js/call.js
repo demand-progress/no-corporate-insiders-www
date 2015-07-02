@@ -118,7 +118,7 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
         return (
             React.createElement("div", {className: "phone-form"}, 
                 React.createElement("form", {onSubmit:  this.onSubmit}, 
-                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on", pattern: "[0-9()-]*"}), 
+                    React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on", pattern: "[\\d\\(\\)\\-\\+ ]*"}), 
                     React.createElement("button", null, 
                         "Connect", 
                         React.createElement("img", {src: "images/phone.svg"})
@@ -144,6 +144,19 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
 
     onSubmit: function(e) {
         e.preventDefault();
+
+        var phoneField = this.refs['field-phone'].getDOMNode();
+        var number = phoneField.value.replace(/[^\d]/g, '');
+
+        if (number.length < 10) {
+            phoneField.focus();
+            return alert('Please enter your 10 digit phone number.');
+        }
+
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://dp-call-congress.herokuapp.com/create?campaignId=nomorewallstreetinsiders&userPhone=' + number;
+        document.body.appendChild(script);
 
         this.props.changeForm('script');
     },

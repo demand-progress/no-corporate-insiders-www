@@ -118,7 +118,7 @@ var PhoneForm = React.createClass({
         return (
             <div className="phone-form">
                 <form onSubmit={ this.onSubmit }>
-                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[0-9()-]*" />
+                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[\d\(\)\-\+ ]*" />
                     <button>
                         Connect
                         <img src="images/phone.svg" />
@@ -144,6 +144,19 @@ var PhoneForm = React.createClass({
 
     onSubmit: function(e) {
         e.preventDefault();
+
+        var phoneField = this.refs['field-phone'].getDOMNode();
+        var number = phoneField.value.replace(/[^\d]/g, '');
+
+        if (number.length < 10) {
+            phoneField.focus();
+            return alert('Please enter your 10 digit phone number.');
+        }
+
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://dp-call-congress.herokuapp.com/create?campaignId=nomorewallstreetinsiders&userPhone=' + number;
+        document.body.appendChild(script);
 
         this.props.changeForm('script');
     },
