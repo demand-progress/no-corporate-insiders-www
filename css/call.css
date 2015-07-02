@@ -89,7 +89,20 @@ a:hover {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.216);
 }
 
+#app .phone-form form h2 {
+    font-weight: 600;
+    margin: 32px 32px 16px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#app .phone-form form .request {
+    padding: 0 32px 32px;
+    text-align: center;
+}
+
 #app .phone-form form input {
+    border-top: 1px solid #ccc;
     box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.076);
     color: #090909;
     font-size: 24px;

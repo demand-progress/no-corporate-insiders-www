@@ -37,6 +37,17 @@ function getQueryVariables() {
     return variables;
 }
 
+function findPos(obj) {
+    var curTop = 0;
+    if (obj.offsetParent) {
+        do {
+            curTop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+
+        return [curTop];
+    }
+}
+
 function k() {}
 
 var Header = React.createClass({displayName: "Header",
@@ -120,6 +131,12 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
         return (
             React.createElement("div", {className: "phone-form"}, 
                 React.createElement("form", {onSubmit:  this.onSubmit}, 
+                    React.createElement("h2", null, "Thanks – we’ll deliver your letter to the White House"), 
+
+                    React.createElement("div", {className: "request"}, 
+                        "Will you make a call to tell the White House to give us a tough “cop on the beat” on Wall Street? Making a phone call is even more effective than sending a letter. We’ll connect you and give you a script. It’ll just take a moment – and it could mean a crackdown on Wall Street’s reckless behavior."
+                    ), 
+
                     React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on", pattern: "[\\d\\(\\)\\-\\+ ]*"}), 
                     React.createElement("button", null, 
                         "Connect", 
@@ -311,6 +328,11 @@ var Form = React.createClass({displayName: "Form",
     },
 
     changeForm: function(form) {
+        if (state.isMobile) {
+            var pos = findPos(this.getDOMNode());
+            scrollTo(0, pos - 16);
+        }
+
         this.setState({
             form: form,
         });

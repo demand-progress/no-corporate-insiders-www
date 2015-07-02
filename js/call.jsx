@@ -37,6 +37,17 @@ function getQueryVariables() {
     return variables;
 }
 
+function findPos(obj) {
+    var curTop = 0;
+    if (obj.offsetParent) {
+        do {
+            curTop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+
+        return [curTop];
+    }
+}
+
 function k() {}
 
 var Header = React.createClass({
@@ -120,6 +131,12 @@ var PhoneForm = React.createClass({
         return (
             <div className="phone-form">
                 <form onSubmit={ this.onSubmit }>
+                    <h2>Thanks – we’ll deliver your letter to the White House</h2>
+
+                    <div className="request">
+                        Will you make a call to tell the White House to give us a tough “cop on the beat” on Wall Street? Making a phone call is even more effective than sending a letter. We’ll connect you and give you a script. It’ll just take a moment – and it could mean a crackdown on Wall Street’s reckless behavior.
+                    </div>
+
                     <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[\d\(\)\-\+ ]*" />
                     <button>
                         Connect
@@ -311,6 +328,11 @@ var Form = React.createClass({
     },
 
     changeForm: function(form) {
+        if (state.isMobile) {
+            var pos = findPos(this.getDOMNode());
+            scrollTo(0, pos - 16);
+        }
+
         this.setState({
             form: form,
         });
