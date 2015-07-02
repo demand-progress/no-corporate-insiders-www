@@ -373,7 +373,7 @@ var Contact = React.createClass({
             <div className="contact">
                 For press inquiries, please contact us at:
                 <br />
-                202-681-7582 or <a href="mailto:press@demandprogress.org">press@demandprogress.org</a>
+                <a href="tel:202-681-7582">202-681-7582</a> or <a href="mailto:press@demandprogress.org">press@demandprogress.org</a>
             </div>
         );
     },
