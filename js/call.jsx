@@ -89,7 +89,7 @@ function getQueryVariables() {
 }
 
 function getSource() {
-    var source = state.query.source || 'demandprogress';
+    var source = state.query.source || '';
     return source.toLowerCase();
 }
 
@@ -139,10 +139,6 @@ var EmailForm = React.createClass({
                     <button>
                         Send Now
                     </button>
-
-                    <div className="hidden">
-                        <input type="hidden" name="source" value={ getSource() } />
-                    </div>
                 </form>
 
                 <div className="disclaimer">

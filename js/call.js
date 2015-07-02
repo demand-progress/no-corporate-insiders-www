@@ -89,7 +89,7 @@ function getQueryVariables() {
 }
 
 function getSource() {
-    var source = state.query.source || 'demandprogress';
+    var source = state.query.source || '';
     return source.toLowerCase();
 }
 
@@ -138,10 +138,6 @@ var EmailForm = React.createClass({displayName: "EmailForm",
                     React.createElement("input", {className: "zip", name: "zip", placeholder: "Zip code", type: "number"}), 
                     React.createElement("button", null, 
                         "Send Now"
-                    ), 
-
-                    React.createElement("div", {className: "hidden"}, 
-                        React.createElement("input", {type: "hidden", name: "source", value:  getSource() })
                     )
                 ), 
 
