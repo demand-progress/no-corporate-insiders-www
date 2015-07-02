@@ -23,6 +23,37 @@ state.query = getQueryVariables();
 
 
 
+// Setup shortcuts for AJAX.
+var ajax = {
+    get: function(url, callback) {
+        callback = callback || function() {};
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                callback(xhr.response);
+            }
+        };
+        xhr.open('get', url, true);
+        xhr.send();
+    },
+
+    post: function(url, formData, callback) {
+        callback = callback || function() {};
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                callback(xhr.response);
+            }
+        };
+        xhr.open('post', url, true);
+        xhr.send(formData);
+    },
+};
+
+
+
 var events = {
     list: {},
     on: function(event, callback) {
@@ -139,8 +170,42 @@ var EmailForm = React.createClass({displayName: "EmailForm",
     onSubmit: function(e) {
         e.preventDefault();
 
-        console.log(this.refs.form.getDOMNode());
-        console.log('We should harvest values from fields.');
+        var form = this.refs.form.getDOMNode();
+
+        var name = form.querySelector('[name="name"]');
+        if (!name.value.trim()) {
+            name.focus();
+            alert('Please enter your name.');
+            return;
+        }
+
+        var emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        var email = form.querySelector('[name="email"]');
+        if (!email.value.trim()) {
+            email.focus();
+            alert('Please enter your email.');
+            return;
+        } else if (!emailRegex.test(email.value.trim())) {
+            email.focus();
+            alert('Please enter a valid email.');
+            return;
+        }
+
+        var zip = form.querySelector('[name="zip"]');
+        if (!zip.value.trim()) {
+            zip.focus();
+            alert('Please enter your zip.');
+            return;
+        }
+
+        var data = new FormData();
+        data.append('campaign', state.campaign);
+        data.append('email', email.value.trim());
+        data.append('name', name.value.trim());
+        data.append('optedIn', true);
+        data.append('source', getSource());
+        data.append('zip', zip.value.trim());
+        ajax.post('https://dp-flexible-signature-db.herokuapp.com/sign', data);
 
         this.props.changeForm('phone');
     },
