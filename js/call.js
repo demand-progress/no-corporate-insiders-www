@@ -210,7 +210,7 @@ var OptOutForm = React.createClass({displayName: "OptOutForm",
         return (
             React.createElement("div", {className: "opt-out-form"}, 
                 React.createElement("div", {className: "script"}, 
-                    "Tell them: “It’s outrageous that the White House is considering naming more Wall Street insiders to the SEC. We need tough ‘cops on the beat’ who will enforce the laws on the big banks, not revolving door picks who will let Wall Street off the hook. President Obama must not name a Wall Street insider like Keir Gumbs or Anne Small to the SEC.”"
+                    "Tell them: ", React.createElement("span", {className: "suggestion"}, "“It’s outrageous that the White House is considering naming more Wall Street insiders to the SEC. We need tough ‘cops on the beat’ who will enforce the laws on the big banks, not revolving door picks who will let Wall Street off the hook. President Obama must not name a Wall Street insider like Keir Gumbs or Anne Small to the SEC.”")
                 ), 
 
                 React.createElement("div", {className: "numbers"}, 

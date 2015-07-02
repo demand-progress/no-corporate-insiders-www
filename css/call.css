@@ -158,8 +158,8 @@ a:hover {
 }
 
 #app .phone-script .suggestion {
-    font-weight: 600;
     color: #09f;
+    font-weight: 600;
 }
 
 #app .phone-script .spacer {
@@ -265,6 +265,11 @@ a:hover {
 
 #app .opt-out-form:hover {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.216);
+}
+
+#app .opt-out-form .suggestion {
+    color: #09f;
+    font-weight: 600;
 }
 
 #app .opt-out-form .numbers .number {
