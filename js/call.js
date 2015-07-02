@@ -68,7 +68,7 @@ var EmailForm = React.createClass({displayName: "EmailForm",
                 React.createElement("form", {onSubmit:  this.onSubmit, ref: "form"}, 
                     React.createElement("input", {className: "name", name: "name", placeholder: "Your name"}), 
                     React.createElement("input", {className: "email", name: "email", placeholder: "Email", type: "email"}), 
-                    React.createElement("input", {className: "zip", name: "zip", placeholder: "Zip code", pattern: "[\\d\\- ]*"}), 
+                    React.createElement("input", {className: "zip", name: "zip", placeholder: "Zip code", type: "number"}), 
                     React.createElement("button", null, 
                         "Send Now"
                     ), 
