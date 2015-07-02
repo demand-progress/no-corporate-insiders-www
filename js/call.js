@@ -1,7 +1,27 @@
+// Check for outdated browsers.
+(function() {
+    var isIE = navigator.userAgent.match(/MSIE (\d+)\./);
+    if (isIE) {
+        var version = +isIE[1];
+        if (version < 10) {
+            alert('Unfortunately your browser, Internet Explorer ' + version + ', is not supported.\nPlease visit the site with a modern browser like Firefox or Chrome.\nThanks!');
+        }
+    }
+
+    if (navigator.userAgent.match(/Android 2\.3/)) {
+        alert('Unfortunately your browser, Android 2.3, is not supported.\nPlease visit the site with a modern browser like Firefox or Chrome.\nThanks!');
+    }
+})();
+
+
+
 var state = {};
 state.isMobile = /mobile/i.test(navigator.userAgent);
+state.isIE = /trident/i.test(navigator.userAgent);
 state.campaign = 'no_more_wall_street_insiders';
 state.query = getQueryVariables();
+
+
 
 var events = {
     list: {},
@@ -106,7 +126,7 @@ var EmailForm = React.createClass({displayName: "EmailForm",
     componentDidMount: function() {
         var nameField = this.refs.form.getDOMNode().querySelector('.name');
 
-        if (!state.isMobile) {
+        if (!state.isMobile && !state.isIE) {
             nameField.focus();
         }
     },
@@ -147,7 +167,7 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
                 React.createElement("div", {className: "privacy"}, 
                     "This tool uses ", React.createElement("a", {href: "https://www.twilio.com/legal/privacy", target: "_blank"}, "Twilio"), "’s APIs.", 
                     React.createElement("br", null), 
-                    "If you prefer not to use our call tool, ", React.createElement("a", {href: "#opt-out", onClick:  this.props.onClickOptOut}, "click here"), "."
+                    "If you prefer not to use our call tool, ", React.createElement("a", {href: "#opt-out", onClick:  this.onClickOptOut}, "click here"), "."
                 )
             )
         );
@@ -156,7 +176,7 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
     componentDidMount: function() {
         var phoneField = this.refs['field-phone'].getDOMNode();
 
-        if (!state.isMobile) {
+        if (!state.isMobile && !state.isIE) {
             phoneField.focus();
         }
     },
@@ -178,6 +198,12 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
         document.body.appendChild(script);
 
         this.props.changeForm('script');
+    },
+
+    onClickOptOut: function(e) {
+        e.preventDefault();
+
+        this.props.changeForm('opt-out');
     },
 });
 
@@ -290,7 +316,7 @@ var Form = React.createClass({displayName: "Form",
             break;
 
             case 'phone':
-            form = React.createElement(PhoneForm, {changeForm:  this.changeForm, onClickOptOut:  this.onClickOptOut});
+            form = React.createElement(PhoneForm, {changeForm:  this.changeForm});
             break;
 
             case 'script':
@@ -319,19 +345,9 @@ var Form = React.createClass({displayName: "Form",
         };
     },
 
-    onClickOptOut: function(e) {
-        e.preventDefault();
-
-        this.setState({
-            form: 'opt-out',
-        });
-    },
-
     changeForm: function(form) {
-        if (state.isMobile) {
-            var pos = findPos(this.getDOMNode());
-            scrollTo(0, pos - 16);
-        }
+        var pos = findPos(this.getDOMNode());
+        scrollTo(0, pos - 16);
 
         this.setState({
             form: form,
