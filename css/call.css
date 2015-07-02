@@ -40,6 +40,11 @@ a:hover {
     padding: 32px;
 }
 
+#app .wrapper > header {
+    margin: 0 auto;
+    max-width: 840px;
+}
+
 #app .title {
     font-size: 48px;
     font-weight: 600;
@@ -54,6 +59,10 @@ a:hover {
     max-width: 960px;
     padding: 0 32px 32px;
     text-align: center;
+}
+
+#app .paragraph .spacer {
+    padding: 16px 0 0;
 }
 
 #app .phone-form form {
