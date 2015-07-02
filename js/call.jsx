@@ -68,7 +68,7 @@ var EmailForm = React.createClass({
                 <form onSubmit={ this.onSubmit } ref="form">
                     <input className="name" name="name" placeholder="Your name" />
                     <input className="email" name="email" placeholder="Email" type="email" />
-                    <input className="zip" name="zip" placeholder="Zip code" type="zip" />
+                    <input className="zip" name="zip" placeholder="Zip code" pattern="[\d\- ]*" />
                     <button>
                         Send Now
                     </button>
