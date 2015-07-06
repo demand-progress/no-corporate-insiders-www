@@ -121,7 +121,7 @@ var Header = React.createClass({displayName: "Header",
                     "The results have been predictably dire: “get out of jail free” waivers to banks that break the law, repeatedly delaying key rules required by the Dodd-Frank Wall Street reform bill, and deadlocking the SEC with innumerable conflicts of interest.", 
                     React.createElement("div", {className: "spacer"}), 
 
-                    "President Obama can’t make this mistake again – and there are two more openings at the SEC. ", React.createElement("strong", null, "Sign the petition: Tell President Obama to nominate SEC commissioners who aren’t afraid to be tough on Wall Street criminals.")
+                    "President Obama can’t make this mistake again – and there are two more openings at the SEC. ", React.createElement("strong", null, "Sign the petition: Tell President Obama to nominate SEC commissioners who aren’t afraid to be tough on Wall Street criminals."), " Then, you can magnify your impact by using our call tool to connect to a key decision-maker in the Obama administration."
                 )
             )
         );
@@ -213,10 +213,10 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
         return (
             React.createElement("div", {className: "phone-form"}, 
                 React.createElement("form", {onSubmit:  this.onSubmit}, 
-                    React.createElement("h2", null, "Thanks – we’ll deliver your petition to the White House"), 
+                    React.createElement("h2", null, "Thanks – could you also make a call?"), 
 
                     React.createElement("div", {className: "request"}, 
-                        "Will you make a call to tell the White House to give us a tough “cop on the beat” on Wall Street? Making a phone call is even more effective than signing a petition. We’ll connect you and give you a script. It’ll just take a moment – and it could mean a crackdown on Wall Street’s reckless behavior."
+                        "We'll deliver your signature to the White House. Now, could you also make a call to tell the White House to give us a tough “cop on the beat” on Wall Street? Making a phone call is even more effective than signing a petition. We’ll connect you and give you a script. It’ll just take a moment – and it could mean a crackdown on Wall Street’s reckless behavior."
                     ), 
 
                     React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on", pattern: "[\\d\\(\\)\\-\\+ ]*"}), 
