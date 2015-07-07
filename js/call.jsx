@@ -121,7 +121,10 @@ var Header = React.createClass({
                     The results have been predictably dire: “get out of jail free” waivers to banks that break the law, repeatedly delaying key rules required by the Dodd-Frank Wall Street reform bill, and deadlocking the SEC with innumerable conflicts of interest.
                     <div className="spacer" />
 
-                    President Obama can’t make this mistake again – and there are two more openings at the SEC. <strong>Sign the petition: Tell President Obama to nominate SEC commissioners who aren’t afraid to be tough on Wall Street criminals.</strong> Then, you can magnify your impact by using our call tool to connect to a key decision-maker in the Obama administration.
+                    President Obama can’t make this mistake again – and there are two more openings at the SEC. <strong>Sign the petition: Tell President Obama to nominate SEC commissioners who aren’t afraid to be tough on Wall Street criminals.</strong>
+                    <div className="spacer" />
+
+                    Then, you can magnify your impact by using our call tool to connect to a key decision-maker in the Obama administration.
                 </div>
             </header>
         );
@@ -249,7 +252,7 @@ var PhoneForm = React.createClass({
         var phoneField = this.refs['field-phone'].getDOMNode();
         var number = phoneField.value.replace(/[^\d]/g, '');
 
-        if (number.length < 10) {
+        if (number.length !== 10) {
             phoneField.focus();
             return alert('Please enter your 10 digit phone number.');
         }
@@ -457,6 +460,16 @@ var Contact = React.createClass({
     },
 });
 
+var CreativeCommons = React.createClass({
+    render: function() {
+        return (
+            <div className="creative-commons">
+                Social media photo via <a href="https://www.flickr.com/photos/132084522@N05/17086570218/in/photolist-s2T93f-aCsYXi-oPq1C2-aCtoP8-aCtq3g-aCtqM8-aCw4ZE-aCw5Ay-aCw5iu-aCtqjT-9xMgR-2ixJCg-4Hgjqa-iBNpq-5AJv1X-bxnPa3-4hMTnc-5ppxQp-5ppzf2-5ptSUW-7Msw4U-E5Z87-7onZXi-wsAoC-7881oQ-6yR8Ad-MKW8o-9McFm3-9McFaC-4hRZqU-5tw48Y-5tJZ6J-5tECet-7LmT9N-tV1WT-d5LKYs-eCnroP-rdRMnA-aCtqBx-aCvB1G-aCvAFq-aCsUAr-aCvBTd-aCsTw8-aCvAqd-aCvztu-aCvCBL-aCsV14-aCvEhU-aCvEMh" target="_blank">Sam Valadi</a> under a <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank">CC BY 2.0</a> license.
+            </div>
+        );
+    },
+});
+
 var CallPages = React.createClass({
     render: function() {
         return (
@@ -468,6 +481,8 @@ var CallPages = React.createClass({
                 <Organizations />
 
                 <Contact />
+
+                <CreativeCommons />
             </div>
         );
     },
