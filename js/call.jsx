@@ -470,6 +470,57 @@ var CreativeCommons = React.createClass({
     },
 });
 
+var Social = React.createClass({
+    render: function() {
+        return (
+            <div className="social">
+                <h2>Share this page!</h2>
+                <div className="copy">
+                    After making a call, share this page with your friends. The more people that speak out, the better our chance of getting a tough ‘cop on the beat’ on Wall Street.
+                </div>
+                <div className="buttons">
+                    <a onClick={this.onClickFacebook} target="_blank" href="#Share on Facebook" className="facebook">Facebook</a>
+                    <a onClick={this.onClickTwitter} target="_blank" href="#Share on Twitter" className="twitter">Twitter</a>
+                </div>
+            </div>
+        );
+    },
+
+    onClickTwitter: function(e) {
+        e.preventDefault();
+
+        var shareText = document.querySelector('[name="twitter:description"]').content;
+
+        var source = getSource();
+
+        if (source) {
+            shareText += '/?source=' + source;
+        }
+
+        var url =
+            'https://twitter.com/intent/tweet?text=' +
+            encodeURIComponent(shareText) +
+            '&ref=rootstrikers';
+
+        window.open(url);
+    },
+
+    onClickFacebook: function(e) {
+        e.preventDefault();
+
+        var url =
+            'https://www.facebook.com/sharer.php?u=http://www.nomorewallstreetinsiders.com/';
+
+        var source = getSource();
+
+        if (source) {
+            url += '%3Fsource%3D' + source;
+        }
+
+        window.open(url);
+    },
+});
+
 var CallPages = React.createClass({
     render: function() {
         return (
@@ -477,6 +528,8 @@ var CallPages = React.createClass({
                 <Header />
 
                 <Form />
+
+                <Social />
 
                 <Organizations />
 

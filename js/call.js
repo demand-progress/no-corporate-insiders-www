@@ -470,6 +470,57 @@ var CreativeCommons = React.createClass({displayName: "CreativeCommons",
     },
 });
 
+var Social = React.createClass({displayName: "Social",
+    render: function() {
+        return (
+            React.createElement("div", {className: "social"}, 
+                React.createElement("h2", null, "Share this page!"), 
+                React.createElement("div", {className: "copy"}, 
+                    "After making a call, share this page with your friends. The more people that speak out, the better our chance of getting a tough ‘cop on the beat’ on Wall Street."
+                ), 
+                React.createElement("div", {className: "buttons"}, 
+                    React.createElement("a", {onClick: this.onClickFacebook, target: "_blank", href: "#Share on Facebook", className: "facebook"}, "Facebook"), 
+                    React.createElement("a", {onClick: this.onClickTwitter, target: "_blank", href: "#Share on Twitter", className: "twitter"}, "Twitter")
+                )
+            )
+        );
+    },
+
+    onClickTwitter: function(e) {
+        e.preventDefault();
+
+        var shareText = document.querySelector('[name="twitter:description"]').content;
+
+        var source = getSource();
+
+        if (source) {
+            shareText += '/?source=' + source;
+        }
+
+        var url =
+            'https://twitter.com/intent/tweet?text=' +
+            encodeURIComponent(shareText) +
+            '&ref=rootstrikers';
+
+        window.open(url);
+    },
+
+    onClickFacebook: function(e) {
+        e.preventDefault();
+
+        var url =
+            'https://www.facebook.com/sharer.php?u=http://www.nomorewallstreetinsiders.com/';
+
+        var source = getSource();
+
+        if (source) {
+            url += '%3Fsource%3D' + source;
+        }
+
+        window.open(url);
+    },
+});
+
 var CallPages = React.createClass({displayName: "CallPages",
     render: function() {
         return (
@@ -477,6 +528,8 @@ var CallPages = React.createClass({displayName: "CallPages",
                 React.createElement(Header, null), 
 
                 React.createElement(Form, null), 
+
+                React.createElement(Social, null), 
 
                 React.createElement(Organizations, null), 
 

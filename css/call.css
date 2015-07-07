@@ -329,6 +329,59 @@ a:hover {
     text-decoration: underline;
 }
 
+#app .social {
+    background-color: #45619d;
+    color: #fff;
+    padding: 0 0 48px;
+    text-align: center;
+}
+
+#app .social h2 {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0;
+    padding: 32px 32px 16px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#app .social .copy {
+    margin: 0 auto;
+    max-width: 760px;
+    padding: 0 32px 32px;
+}
+
+#app .social .buttons {
+}
+
+#app .social .buttons a {
+    background-color: #09f;
+    background-position: 11px 7px;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    border-radius: 2px;
+    color: #fff;
+    height: 32px;
+    line-height: 32px;
+    padding: 8px 16px 8px 48px;
+
+    -webkit-transition: background-color 0.3s;
+            transition: background-color 0.3s;
+}
+
+#app .social .buttons a:hover {
+    background-color: #50b9ff;
+}
+
+#app .social .buttons a.facebook {
+    background-image: url(../images/social/fb_white.png);
+    margin: 0 16px 0 0;
+}
+
+#app .social .buttons a.twitter {
+    background-image: url(../images/social/tw_white.png);
+}
+
 #app .contact {
     font-size: 18px;
     margin: 0 auto;
@@ -361,15 +414,21 @@ a:hover {
     -webkit-animation: fadein 0.312s 0.06s forwards;
             animation: fadein 0.312s 0.06s forwards;
 }
-#app .wrapper > .organizations {
+#app .wrapper > .social {
     opacity: 0;
 
     -webkit-animation: fadein 0.312s 0.12s forwards;
             animation: fadein 0.312s 0.12s forwards;
 }
-#app .wrapper > .contact {
+#app .wrapper > .organizations {
+    opacity: 0;
+
     -webkit-animation: fadein 0.312s 0.18s forwards;
             animation: fadein 0.312s 0.18s forwards;
+}
+#app .wrapper > .contact {
+    -webkit-animation: fadein 0.312s 0.24s forwards;
+            animation: fadein 0.312s 0.24s forwards;
     opacity: 0;
 }
 
