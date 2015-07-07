@@ -219,13 +219,12 @@ var PhoneForm = React.createClass({
                     <h2>Thanks – could you also make a call?</h2>
 
                     <div className="request">
-                        We&apos;ll deliver your signature to the White House. Now, could you also make a call to tell the White House to give us a tough “cop on the beat” on Wall Street? Making a phone call is even more effective than signing a petition. We’ll connect you and give you a script. It’ll just take a moment – and it could mean a crackdown on Wall Street’s reckless behavior.
+                    We&apos;ll deliver your signature. Now, could you also make a call to tell the White House not to pick another Wall Street insider who will let big banks off the hook? Making a phone call is even more effective than signing a petition. <strong>Just enter your number – we’ll connect you and give you a script.</strong> It’ll just take a moment, and it could mean Wall Street will finally be held accountable.
                     </div>
 
                     <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[\d\(\)\-\+ ]*" />
                     <button>
                         Connect
-                        <img src="images/phone.svg" />
                     </button>
                 </form>
 
@@ -405,8 +404,14 @@ var Form = React.createClass({
     },
 
     getInitialState: function () {
+        var form = 'email';
+
+        if (state.query.call_tool) {
+            form = 'phone';
+        }
+
         return {
-            form: 'email',
+            form: form,
         };
     },
 
