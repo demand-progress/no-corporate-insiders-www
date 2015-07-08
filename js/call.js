@@ -190,7 +190,7 @@ var EmailForm = React.createClass({displayName: "EmailForm",
             return;
         }
 
-        var zipRegex = /^\d{4,5}(-\d{4})$/i;
+        var zipRegex = /^\d{4,5}(-\d{4})?$/i;
         var zip = form.querySelector('[name="zip"]');
         if (!zip.value.trim()) {
             zip.focus();
