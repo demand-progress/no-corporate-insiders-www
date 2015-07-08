@@ -138,7 +138,7 @@ var EmailForm = React.createClass({
                 <form onSubmit={ this.onSubmit } ref="form">
                     <input className="name" name="name" placeholder="Your name" />
                     <input className="email" name="email" placeholder="Email" type="email" />
-                    <input className="zip" name="zip" placeholder="Zip code" type="number" />
+                    <input className="zip" name="zip" placeholder="Zip code" type="tel" />
                     <button>
                         Send Now
                     </button>
@@ -190,10 +190,15 @@ var EmailForm = React.createClass({
             return;
         }
 
+        var zipRegex = /^\d{4,5}(-\d{4})$/i;
         var zip = form.querySelector('[name="zip"]');
         if (!zip.value.trim()) {
             zip.focus();
             alert('Please enter your zip.');
+            return;
+        } else if (!zipRegex.test(zip.value.trim())) {
+            zip.focus();
+            alert('Please enter a valid zip.');
             return;
         }
 
