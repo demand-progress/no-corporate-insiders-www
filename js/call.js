@@ -219,12 +219,16 @@ var PhoneForm = React.createClass({displayName: "PhoneForm",
                     React.createElement("h2", null, "Thanks – could you also make a call?"), 
 
                     React.createElement("div", {className: "request"}, 
-                    "We'll deliver your signature. Now, could you also make a call to tell the White House not to pick another Wall Street insider who will let big banks off the hook? Making a phone call is even more effective than signing a petition. ", React.createElement("strong", null, "Just enter your number – we’ll connect you and give you a script."), " It’ll just take a moment, and it could mean Wall Street will finally be held accountable."
+                        "We'll deliver your signature. Now, could you also make a quick phone call? It's the single most effective action you can take.", 
+                        React.createElement("br", null), 
+                        React.createElement("br", null), 
+                        React.createElement("strong", null, "Just enter your number – we’ll connect you and give you a script."), " It takes just a moment, and will help make sure Wall Street is finally held accountable."
                     ), 
 
                     React.createElement("input", {placeholder: "Your Phone Number", id: "field-phone", ref: "field-phone", class: "phone", name: "phone", autocomplete: "on", pattern: "[\\d\\(\\)\\-\\+ ]*"}), 
                     React.createElement("button", null, 
-                        "Connect"
+                        "Get script and call", 
+                        React.createElement("img", {src: "images/phone.svg"})
                     )
                 ), 
 

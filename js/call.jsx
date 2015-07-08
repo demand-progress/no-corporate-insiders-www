@@ -219,12 +219,16 @@ var PhoneForm = React.createClass({
                     <h2>Thanks – could you also make a call?</h2>
 
                     <div className="request">
-                    We&apos;ll deliver your signature. Now, could you also make a call to tell the White House not to pick another Wall Street insider who will let big banks off the hook? Making a phone call is even more effective than signing a petition. <strong>Just enter your number – we’ll connect you and give you a script.</strong> It’ll just take a moment, and it could mean Wall Street will finally be held accountable.
+                        We&apos;ll deliver your signature. Now, could you also make a quick phone call? It&apos;s the single most effective action you can take.
+                        <br />
+                        <br />
+                        <strong>Just enter your number – we’ll connect you and give you a script.</strong> It takes just a moment, and will help make sure Wall Street is finally held accountable.
                     </div>
 
                     <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[\d\(\)\-\+ ]*" />
                     <button>
-                        Connect
+                        Get script and call
+                        <img src="images/phone.svg" />
                     </button>
                 </form>
 
