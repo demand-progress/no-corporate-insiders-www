@@ -1,4 +1,7 @@
 // Check for outdated browsers.
+const React = require('react');
+const ReactDOM = require('react-dom');
+
 (function() {
     var isIE = /MSIE (\d+)\./.test(navigator.userAgent);
     if (isIE) {
@@ -136,7 +139,7 @@ var EmailForm = React.createClass({
         return (
             <div className="email-form">
                 <form onSubmit={ this.onSubmit } ref="form">
-                    <input className="name" name="name" placeholder="Your name" />
+                    <input className="name" name="name" placeholder="Your name" autoFocus />
                     <input className="email" name="email" placeholder="Email" type="email" />
                     <input className="zip" name="zip" placeholder="Zip code" type="tel" />
                     <button>
@@ -159,17 +162,17 @@ var EmailForm = React.createClass({
     },
 
     componentDidMount: function() {
-        var nameField = this.refs.form.getDOMNode().querySelector('.name');
+        // var nameField = this.refs.form.querySelector('.name');
 
-        if (!state.isMobile && !state.isIE) {
-            nameField.focus();
-        }
+        // if (!state.isMobile && !state.isIE) {
+        //     nameField.focus();
+        // }
     },
 
     onSubmit: function(e) {
         e.preventDefault();
 
-        var form = this.refs.form.getDOMNode();
+        var form = this.refs.form;
 
         var name = form.querySelector('[name="name"]');
         if (!name.value.trim()) {
@@ -225,7 +228,7 @@ var PhoneForm = React.createClass({
                         <strong>Just enter your number – we’ll connect you and give you a script.</strong> It takes just a moment, and will help make sure Wall Street is finally held accountable.
                     </div>
 
-                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" class="phone" name="phone" autocomplete="on" pattern="[\d\(\)\-\+ ]*" />
+                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" className="phone" name="phone" autoComplete="on" pattern="[\d\(\)\-\+ ]*" autoFocus />
                     <button>
                         Get script and call
                         <img src="images/phone.svg" />
@@ -242,17 +245,17 @@ var PhoneForm = React.createClass({
     },
 
     componentDidMount: function() {
-        var phoneField = this.refs['field-phone'].getDOMNode();
+        // var phoneField = this.refs['field-phone'];
 
-        if (!state.isMobile && !state.isIE) {
-            phoneField.focus();
-        }
+        // if (!state.isMobile && !state.isIE) {
+        //     phoneField.focus();
+        // }
     },
 
     onSubmit: function(e) {
         e.preventDefault();
 
-        var phoneField = this.refs['field-phone'].getDOMNode();
+        var phoneField = this.refs['field-phone'];
         var number = phoneField.value.replace(/[^\d]/g, '');
 
         if (number.length !== 10) {
@@ -408,7 +411,7 @@ var Form = React.createClass({
     },
 
     getInitialState: function () {
-        var form = 'email';
+        var form = 'phone';
 
         if (state.query.call_tool) {
             form = 'phone';
@@ -424,7 +427,7 @@ var Form = React.createClass({
             form: form,
         });
 
-        var pos = findPos(this.getDOMNode());
+        var pos = findPos(this);
         scrollTo(0, pos - 16);
     },
 });
@@ -434,7 +437,11 @@ var Organizations = React.createClass({
         var organizations = [];
         for (var name in this.organizations) {
             organizations.push(
-                <a href={ this.organizations[name] } target="_blank">
+                <a
+                    href={ this.organizations[name] }
+                    target="_blank"
+                    key={name}
+                >
                     { name }
                 </a>
             );
@@ -561,4 +568,7 @@ var CallPages = React.createClass({
     },
 });
 
-React.render(<CallPages />, document.getElementById('app'));
+ReactDOM.render(
+    <CallPages />,
+    document.querySelector('#app')
+);
