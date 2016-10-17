@@ -555,8 +555,6 @@ var CallPages = React.createClass({
 
                 <Social />
 
-                <Organizations />
-
                 <Contact />
 
                 <CreativeCommons />

@@ -688,7 +688,6 @@
 	            React.createElement(Header, null),
 	            React.createElement(Form, null),
 	            React.createElement(Social, null),
-	            React.createElement(Organizations, null),
 	            React.createElement(Contact, null),
 	            React.createElement(CreativeCommons, null)
 	        );
