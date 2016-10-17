@@ -46,7 +46,6 @@
 
 	'use strict';
 
-	// Check for outdated browsers.
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
 
@@ -161,23 +160,22 @@
 	            React.createElement(
 	                'div',
 	                { className: 'title' },
-	                'Tell President Obama: No More Wall Street Insiders at the SEC'
+	                'TELL HILLARY: DON\'T APPOINT CORPORATE INSIDERS TO YOUR ADMINISTRATION'
 	            ),
 	            React.createElement(
 	                'div',
 	                { className: 'paragraph' },
-	                'The first time President Obama had an opening at the SEC \u2013 which oversees Wall Street \u2013 he appointed Mary Jo White, who had spent most of her career defending Wall Street.',
+	                'Hillary Clinton\'s team is already deciding who\'s likely to get key positions in her administration \u2014 like Chief of Staff, head of the Treasury Department, and more.',
 	                React.createElement('div', { className: 'spacer' }),
-	                'The results have been predictably dire: \u201Cget out of jail free\u201D waivers to banks that break the law, repeatedly delaying key rules required by the Dodd-Frank Wall Street reform bill, and deadlocking the SEC with innumerable conflicts of interest.',
+	                'Too frequently, Wall Street and other corporate insiders get appointed to these positions -- and then use the government to do the bidding of their friends and former employers.',
 	                React.createElement('div', { className: 'spacer' }),
-	                'President Obama can\u2019t make this mistake again \u2013 and there are two more openings at the SEC. ',
+	                'This is how banks get bailed out and avoid strong penalties for bad behavior.  It\'s why we have to fight tooth-and-nail to maintain an open Internet.  It\'s why corporations aren\'t forced to disclose their political spending.',
+	                React.createElement('div', { className: 'spacer' }),
 	                React.createElement(
 	                    'strong',
 	                    null,
-	                    'Sign the petition: Tell President Obama to nominate SEC commissioners who aren\u2019t afraid to be tough on Wall Street criminals.'
-	                ),
-	                React.createElement('div', { className: 'spacer' }),
-	                'Then, you can magnify your impact by using our call tool to connect to a key decision-maker in the Obama administration.'
+	                    'Getting the right people into the administration from the get-go is critical.  You can use our call tool to tell the key people on Clinton\'s transition team to make sure that happens -- making a few calls will help us change the way billions of dollars are spent in coming years.'
+	                )
 	            )
 	        );
 	    }
@@ -269,54 +267,50 @@
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { className: 'phone-form' },
+	            null,
 	            React.createElement(
-	                'form',
-	                { onSubmit: this.onSubmit },
+	                'div',
+	                { className: 'phone-form' },
 	                React.createElement(
-	                    'h2',
-	                    null,
-	                    'Thanks \u2013\xA0could you also make a call?'
+	                    'form',
+	                    { onSubmit: this.onSubmit },
+	                    React.createElement('input', { placeholder: 'Your Phone Number', id: 'field-phone', ref: 'field-phone', className: 'phone', name: 'phone', autoComplete: 'on', pattern: '[\\d\\(\\)\\-\\+ ]*', autoFocus: true }),
+	                    React.createElement(
+	                        'button',
+	                        null,
+	                        'CLICK HERE TO CALL CLINTON\'S TRANSITION TEAM',
+	                        React.createElement('img', { src: 'images/phone.svg' })
+	                    )
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: 'request' },
-	                    'We\'ll deliver your signature. Now, could you also make a quick phone call? It\'s the single most effective action you can take.',
-	                    React.createElement('br', null),
-	                    React.createElement('br', null),
+	                    { className: 'privacy' },
+	                    'This tool uses ',
 	                    React.createElement(
-	                        'strong',
-	                        null,
-	                        'Just enter your number \u2013 we\u2019ll connect you and give you a script.'
+	                        'a',
+	                        { href: 'https://www.twilio.com/legal/privacy', target: '_blank' },
+	                        'Twilio'
 	                    ),
-	                    ' It takes just a moment, and will help make sure Wall Street is finally held accountable.'
-	                ),
-	                React.createElement('input', { placeholder: 'Your Phone Number', id: 'field-phone', ref: 'field-phone', className: 'phone', name: 'phone', autoComplete: 'on', pattern: '[\\d\\(\\)\\-\\+ ]*', autoFocus: true }),
-	                React.createElement(
-	                    'button',
-	                    null,
-	                    'Get script and call',
-	                    React.createElement('img', { src: 'images/phone.svg' })
+	                    '\u2019s APIs.',
+	                    React.createElement('br', null),
+	                    'If you prefer not to use our call tool, ',
+	                    React.createElement(
+	                        'a',
+	                        { href: '#opt-out', onClick: this.onClickOptOut },
+	                        'click here'
+	                    ),
+	                    '.'
 	                )
 	            ),
 	            React.createElement(
 	                'div',
-	                { className: 'privacy' },
-	                'This tool uses ',
-	                React.createElement(
-	                    'a',
-	                    { href: 'https://www.twilio.com/legal/privacy', target: '_blank' },
-	                    'Twilio'
-	                ),
-	                '\u2019s APIs.',
-	                React.createElement('br', null),
-	                'If you prefer not to use our call tool, ',
-	                React.createElement(
-	                    'a',
-	                    { href: '#opt-out', onClick: this.onClickOptOut },
-	                    'click here'
-	                ),
-	                '.'
+	                {
+	                    className: 'paragraph',
+	                    style: {
+	                        maxWidth: '860px'
+	                    }
+	                },
+	                'Please enter your number above and we will give you a script and connect you to key members of Clinton\'s transition team so you can tell them to make sure the administration doesn\'t hire corporate insiders'
 	            )
 	        );
 	    },
@@ -340,10 +334,10 @@
 	            return alert('Please enter your 10 digit phone number.');
 	        }
 
-	        var script = document.createElement('script');
-	        script.async = true;
-	        script.src = 'https://dp-call-congress.herokuapp.com/create?callback=k&campaignId=nomorewallstreetinsiders&userPhone=' + number + '&source_id=' + getSource();
-	        document.body.appendChild(script);
+	        var request = new XMLHttpRequest();
+	        var url = 'https://dp-call-congress.herokuapp.com/create?campaignId=nomorewallstreetinsiders&userPhone=' + number + '&source_id=' + getSource();
+	        request.open('GET', url, true);
+	        request.send();
 
 	        this.props.changeForm('script');
 	    },
@@ -441,29 +435,19 @@
 	            React.createElement(
 	                'h2',
 	                null,
-	                'We\u2019re calling you now'
+	                'Awesome.  Making a few calls could help change the way billions of public dollars are spent in coming years.'
 	            ),
-	            'We\u2019ll connect you to a key decision-maker at the White House. Don\u2019t hang up after the call. Just press ',
-	            React.createElement(
-	                'strong',
-	                null,
-	                '* (star)'
-	            ),
-	            ' and we\u2019ll connect you with another decision-maker. Each additional call will magnify your impact. Here\u2019s what you can say:',
+	            'We are going to connect you to people have have power over who Clinton will appoint to her administration.  Some of them might be surprised to hear from you: They\'re not all used to getting calls from the public -- even as they make decisions that will affect the lives of millions of people.',
+	            React.createElement('div', { className: 'spacer' }),
+	            'Please be polite and say:',
 	            React.createElement('div', { className: 'spacer' }),
 	            React.createElement(
 	                'div',
 	                { className: 'suggestion' },
-	                '\u201CIt\u2019s outrageous that the White House is considering naming more Wall Street insiders to the SEC. We need tough \u2018cops on the beat\u2019 who will enforce the laws on the big banks, not revolving door picks who will let Wall Street off the hook. President Obama must not name a Wall Street insider like Keir Gumbs or Anne Small to the SEC.\u201D'
+	                '\u201CI am calling because I want you to know how important it is that the Clinton administration appoint people who care about the public interest -- not just more Wall Street and other corporate insiders.\u201D'
 	            ),
 	            React.createElement('div', { className: 'spacer' }),
-	            'If you\u2019re able to make more calls after you\u2019re done, you\u2019ll have an even bigger impact. Just press ',
-	            React.createElement(
-	                'strong',
-	                null,
-	                '* (star)'
-	            ),
-	            ' and we\u2019ll connect you with another decision-maker!'
+	            'After each call is over, please hit the * key, and we will connect you to somebody else.'
 	        );
 	    }
 	});
@@ -526,6 +510,10 @@
 
 	        if (state.query.call_tool) {
 	            form = 'phone';
+	        }
+
+	        if (state.query.debugState) {
+	            form = state.query.debugState;
 	        }
 
 	        return {

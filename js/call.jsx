@@ -1,4 +1,3 @@
-// Check for outdated browsers.
 const React = require('react');
 const ReactDOM = require('react-dom');
 
@@ -114,20 +113,20 @@ var Header = React.createClass({
         return (
             <header>
                 <div className="title">
-                    Tell President Obama: No More Wall Street Insiders at the SEC
+                    TELL HILLARY: DON'T APPOINT CORPORATE INSIDERS TO YOUR ADMINISTRATION
                 </div>
 
                 <div className="paragraph">
-                    The first time President Obama had an opening at the SEC – which oversees Wall Street – he appointed Mary Jo White, who had spent most of her career defending Wall Street.
+                    Hillary Clinton's team is already deciding who's likely to get key positions in her administration &mdash; like Chief of Staff, head of the Treasury Department, and more.
                     <div className="spacer" />
 
-                    The results have been predictably dire: “get out of jail free” waivers to banks that break the law, repeatedly delaying key rules required by the Dodd-Frank Wall Street reform bill, and deadlocking the SEC with innumerable conflicts of interest.
+                    Too frequently, Wall Street and other corporate insiders get appointed to these positions -- and then use the government to do the bidding of their friends and former employers.
                     <div className="spacer" />
 
-                    President Obama can’t make this mistake again – and there are two more openings at the SEC. <strong>Sign the petition: Tell President Obama to nominate SEC commissioners who aren’t afraid to be tough on Wall Street criminals.</strong>
+                    This is how banks get bailed out and avoid strong penalties for bad behavior.  It's why we have to fight tooth-and-nail to maintain an open Internet.  It's why corporations aren't forced to disclose their political spending.
                     <div className="spacer" />
 
-                    Then, you can magnify your impact by using our call tool to connect to a key decision-maker in the Obama administration.
+                    <strong>Getting the right people into the administration from the get-go is critical.  You can use our call tool to tell the key people on Clinton's transition team to make sure that happens -- making a few calls will help us change the way billions of dollars are spent in coming years.</strong>
                 </div>
             </header>
         );
@@ -217,28 +216,30 @@ var EmailForm = React.createClass({
 var PhoneForm = React.createClass({
     render: function() {
         return (
-            <div className="phone-form">
-                <form onSubmit={ this.onSubmit }>
-                    <h2>Thanks – could you also make a call?</h2>
+            <div>
+                <div className="phone-form">
+                    <form onSubmit={ this.onSubmit }>
+                        <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" className="phone" name="phone" autoComplete="on" pattern="[\d\(\)\-\+ ]*" autoFocus />
+                        <button>
+                            CLICK HERE TO CALL CLINTON'S TRANSITION TEAM
+                            <img src="images/phone.svg" />
+                        </button>
+                    </form>
 
-                    <div className="request">
-                        We&apos;ll deliver your signature. Now, could you also make a quick phone call? It&apos;s the single most effective action you can take.
+                    <div className="privacy">
+                        This tool uses <a href="https://www.twilio.com/legal/privacy" target="_blank">Twilio</a>’s APIs.
                         <br />
-                        <br />
-                        <strong>Just enter your number – we’ll connect you and give you a script.</strong> It takes just a moment, and will help make sure Wall Street is finally held accountable.
+                        If you prefer not to use our call tool, <a href="#opt-out" onClick={ this.onClickOptOut }>click here</a>.
                     </div>
-
-                    <input placeholder="Your Phone Number" id="field-phone" ref="field-phone" className="phone" name="phone" autoComplete="on" pattern="[\d\(\)\-\+ ]*" autoFocus />
-                    <button>
-                        Get script and call
-                        <img src="images/phone.svg" />
-                    </button>
-                </form>
-
-                <div className="privacy">
-                    This tool uses <a href="https://www.twilio.com/legal/privacy" target="_blank">Twilio</a>’s APIs.
-                    <br />
-                    If you prefer not to use our call tool, <a href="#opt-out" onClick={ this.onClickOptOut }>click here</a>.
+                </div>
+            
+                <div
+                    className="paragraph"
+                    style={{
+                        maxWidth: '860px',
+                    }}
+                >
+                    Please enter your number above and we will give you a script and connect you to key members of Clinton's transition team so you can tell them to make sure the administration doesn't hire corporate insiders
                 </div>
             </div>
         );
@@ -263,10 +264,10 @@ var PhoneForm = React.createClass({
             return alert('Please enter your 10 digit phone number.');
         }
 
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://dp-call-congress.herokuapp.com/create?callback=k&campaignId=nomorewallstreetinsiders&userPhone=' + number + '&source_id=' + getSource();
-        document.body.appendChild(script);
+        var request = new XMLHttpRequest();
+        var url = 'https://dp-call-congress.herokuapp.com/create?campaignId=nomorewallstreetinsiders&userPhone=' + number + '&source_id=' + getSource();
+        request.open('GET', url, true);
+        request.send();
 
         this.props.changeForm('script');
     },
@@ -341,17 +342,20 @@ var PhoneScript = React.createClass({
     render: function() {
         return (
             <div className="phone-script">
-                <h2>We’re calling you now</h2>
+                <h2>Awesome.  Making a few calls could help change the way billions of public dollars are spent in coming years.</h2>
 
-                We’ll connect you to a key decision-maker at the White House. Don’t hang up after the call. Just press <strong>* (star)</strong> and we’ll connect you with another decision-maker. Each additional call will magnify your impact. Here’s what you can say:
+                We are going to connect you to people have have power over who Clinton will appoint to her administration.  Some of them might be surprised to hear from you: They're not all used to getting calls from the public -- even as they make decisions that will affect the lives of millions of people.
+                <div className="spacer" />
+
+                Please be polite and say:
                 <div className="spacer" />
 
                 <div className="suggestion">
-                    “It’s outrageous that the White House is considering naming more Wall Street insiders to the SEC. We need tough ‘cops on the beat’ who will enforce the laws on the big banks, not revolving door picks who will let Wall Street off the hook. President Obama must not name a Wall Street insider like Keir Gumbs or Anne Small to the SEC.”
+                    “I am calling because I want you to know how important it is that the Clinton administration appoint people who care about the public interest -- not just more Wall Street and other corporate insiders.”
                 </div>
                 <div className="spacer" />
 
-                If you’re able to make more calls after you’re done, you’ll have an even bigger impact. Just press <strong>* (star)</strong> and we’ll connect you with another decision-maker!
+                After each call is over, please hit the * key, and we will connect you to somebody else.
             </div>
         );
     },
@@ -415,6 +419,10 @@ var Form = React.createClass({
 
         if (state.query.call_tool) {
             form = 'phone';
+        }
+
+        if (state.query.debugState) {
+            form = state.query.debugState;
         }
 
         return {
