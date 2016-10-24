@@ -165,16 +165,22 @@
 	            React.createElement(
 	                'div',
 	                { className: 'paragraph' },
-	                'Hillary Clinton\'s team is already deciding who\'s likely to get key positions in her administration \u2014 like Chief of Staff, head of the Treasury Department, and more.',
+	                'Hillary Clinton\'s team is ',
+	                React.createElement(
+	                    'strong',
+	                    null,
+	                    'already deciding'
+	                ),
+	                ' who\'s likely to get key positions in her administration \u2014 like Chief of Staff, head of the Treasury Department, and more.',
 	                React.createElement('div', { className: 'spacer' }),
-	                'Too frequently, Wall Street and other corporate insiders get appointed to these positions -- and then use the government to do the bidding of their friends and former employers.',
+	                'Too frequently, Wall Street executives and other corporate insiders get appointed to these positions \u2014 and then use the government to do the bidding of their friends and former employers.',
 	                React.createElement('div', { className: 'spacer' }),
-	                'This is how banks get bailed out and avoid strong penalties for bad behavior.  It\'s why we have to fight tooth-and-nail to maintain an open Internet.  It\'s why corporations aren\'t forced to disclose their political spending.',
+	                'This is how banks get bailed out and avoid strong penalties for bad behavior. It\'s why we have to fight tooth-and-nail to maintain an open Internet. It\'s why corporations are allowed to hide their political spending.',
 	                React.createElement('div', { className: 'spacer' }),
 	                React.createElement(
 	                    'strong',
 	                    null,
-	                    'Getting the right people into the administration from the get-go is critical.  You can use our call tool to tell the key people on Clinton\'s transition team to make sure that happens -- making a few calls will help us change the way billions of dollars are spent in coming years.'
+	                    'Getting the right people into the administration from the get-go is critical. You can use our call tool to tell the key people on Clinton\'s transition team to make sure that happens \u2014 making a few calls now will help us change the way the government runs for years to come.'
 	                )
 	            )
 	        );
@@ -310,7 +316,7 @@
 	                        maxWidth: '860px'
 	                    }
 	                },
-	                'Please enter your number above and we will give you a script and connect you to key members of Clinton\'s transition team so you can tell them to make sure the administration doesn\'t hire corporate insiders'
+	                'Please enter your number above and we will give you a script and connect you to key members of Clinton\'stransition team so you can tell them to make sure the administration doesn\'t hire corporate insiders.'
 	            )
 	        );
 	    },
@@ -435,19 +441,19 @@
 	            React.createElement(
 	                'h2',
 	                null,
-	                'Awesome.  Making a few calls could help change the way billions of public dollars are spent in coming years.'
+	                'Awesome. Making a few calls now will help us change the way the government runs for years to come.'
 	            ),
-	            'We are going to connect you to people have have power over who Clinton will appoint to her administration.  Some of them might be surprised to hear from you: They\'re not all used to getting calls from the public -- even as they make decisions that will affect the lives of millions of people.',
+	            'We are going to connect you to people have have power over who Clinton will appoint to her administration. Some of them might be surprised to hear from you: They\'re not all used to getting calls from the public \u2014 even as they are making decisions RIGHT NOW that will affect the lives of millions of people.',
 	            React.createElement('div', { className: 'spacer' }),
 	            'Please be polite and say:',
 	            React.createElement('div', { className: 'spacer' }),
 	            React.createElement(
 	                'div',
 	                { className: 'suggestion' },
-	                '\u201CI am calling because I want you to know how important it is that the Clinton administration appoint people who care about the public interest -- not just more Wall Street and other corporate insiders.\u201D'
+	                '\u201CI am calling because I want you to know how important it is that the people Hillary Clinton appoints to her administration care about the public interest \u2014 and are not just more Wall Street executives and other corporate insiders.\u201D'
 	            ),
 	            React.createElement('div', { className: 'spacer' }),
-	            'After each call is over, please hit the * key, and we will connect you to somebody else.'
+	            'If you reach an answering machine, please leave a message. After each call is over, please hit the * key, and we will connect you to somebody else.'
 	        );
 	    }
 	});
