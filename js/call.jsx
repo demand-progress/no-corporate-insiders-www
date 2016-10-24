@@ -18,6 +18,7 @@ const ReactDOM = require('react-dom');
 
 
 var state = {};
+state.callCampaign = 'no-more-corporate-insiders';
 state.isMobile = /mobile/i.test(navigator.userAgent);
 state.isIE = /trident/i.test(navigator.userAgent);
 state.campaign = 'no_more_wall_street_insiders';
@@ -265,7 +266,7 @@ var PhoneForm = React.createClass({
         }
 
         var request = new XMLHttpRequest();
-        var url = 'https://dp-call-congress.herokuapp.com/create?campaignId=nomorewallstreetinsiders&userPhone=' + number + '&source_id=' + getSource();
+        var url = `https://dp-call-congress.herokuapp.com/create?campaignId=${state.callCampaign}&userPhone=${number}&source_id=${getSource()}`;
         request.open('GET', url, true);
         request.send();
 
