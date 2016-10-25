@@ -46,9 +46,11 @@
 
 	'use strict';
 
+	// Modules
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
 
+	// Checking for outdated browsers
 	(function () {
 	    var isIE = /MSIE (\d+)\./.test(navigator.userAgent);
 	    if (isIE) {
@@ -63,11 +65,22 @@
 	    }
 	})();
 
+	// Config
+	var config = {};
+	config.campaign = 'no-corporate-insiders';
+	config.link = 'https://nocorporateinsiders.com/';
+	config.prettyCampaignName = 'No Corporate Insiders';
+
+	// URLs
+	var urls = {};
+	urls.facebook = 'https://www.facebook.com/sharer.php?u=';
+	urls.feedback = 'https://dp-feedback-tool.herokuapp.com/api/v1/feedback?';
+	urls.twitter = 'https://twitter.com/intent/tweet?text=';
+
+	// State
 	var state = {};
-	state.callCampaign = 'no-more-corporate-insiders';
 	state.isMobile = /mobile/i.test(navigator.userAgent);
 	state.isIE = /trident/i.test(navigator.userAgent);
-	state.campaign = 'no_more_wall_street_insiders';
 	state.query = getQueryVariables();
 
 	// Setup shortcuts for AJAX.
@@ -77,7 +90,7 @@
 
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function () {
-	            if (xhr.readyState === 4) {
+	            if (xhr.readyState === 4 && callback) {
 	                callback(xhr.response);
 	            }
 	        };
@@ -90,7 +103,7 @@
 
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function () {
-	            if (xhr.readyState === 4) {
+	            if (xhr.readyState === 4 && callback) {
 	                callback(xhr.response);
 	            }
 	        };
@@ -188,86 +201,6 @@
 	    }
 	});
 
-	var EmailForm = React.createClass({
-	    displayName: 'EmailForm',
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: 'email-form' },
-	            React.createElement(
-	                'form',
-	                { onSubmit: this.onSubmit, ref: 'form' },
-	                React.createElement('input', { className: 'name', name: 'name', placeholder: 'Your name', autoFocus: true }),
-	                React.createElement('input', { className: 'email', name: 'email', placeholder: 'Email', type: 'email' }),
-	                React.createElement('input', { className: 'zip', name: 'zip', placeholder: 'Zip code', type: 'tel' }),
-	                React.createElement(
-	                    'button',
-	                    null,
-	                    'Send Now'
-	                )
-	            ),
-	            React.createElement(
-	                'div',
-	                { className: 'disclaimer' },
-	                'We do not share your email address without your permission. Demand Progress, Democracy For America, National People\u2019s Action, Other 98, RootsAction, and Rootstrikers may send you updates on this and other important campaigns by email. If at any time you would like to unsubscribe from any of these email lists, you may do so.'
-	            )
-	        );
-	    },
-
-	    componentDidMount: function componentDidMount() {
-	        // var nameField = this.refs.form.querySelector('.name');
-
-	        // if (!state.isMobile && !state.isIE) {
-	        //     nameField.focus();
-	        // }
-	    },
-
-	    onSubmit: function onSubmit(e) {
-	        e.preventDefault();
-
-	        var form = this.refs.form;
-
-	        var name = form.querySelector('[name="name"]');
-	        if (!name.value.trim()) {
-	            name.focus();
-	            alert('Please enter your name.');
-	            return;
-	        }
-
-	        var emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-	        var email = form.querySelector('[name="email"]');
-	        if (!email.value.trim()) {
-	            email.focus();
-	            alert('Please enter your email.');
-	            return;
-	        } else if (!emailRegex.test(email.value.trim())) {
-	            email.focus();
-	            alert('Please enter a valid email.');
-	            return;
-	        }
-
-	        var zip = form.querySelector('[name="zip"]');
-	        if (!zip.value.trim()) {
-	            zip.focus();
-	            alert('Please enter your zip.');
-	            return;
-	        }
-
-	        var data = new FormData();
-	        data.append('campaign', state.campaign);
-	        data.append('email', email.value.trim());
-	        data.append('name', name.value.trim());
-	        data.append('optedIn', true);
-	        data.append('source', getSource());
-	        data.append('userAgent', navigator.userAgent);
-	        data.append('zip', zip.value.trim());
-	        ajax.post('https://dp-flexible-signature-db.herokuapp.com/sign', data);
-
-	        this.props.changeForm('phone');
-	    }
-	});
-
 	var PhoneForm = React.createClass({
 	    displayName: 'PhoneForm',
 
@@ -322,14 +255,6 @@
 	        );
 	    },
 
-	    componentDidMount: function componentDidMount() {
-	        // var phoneField = this.refs['field-phone'];
-
-	        // if (!state.isMobile && !state.isIE) {
-	        //     phoneField.focus();
-	        // }
-	    },
-
 	    onSubmit: function onSubmit(e) {
 	        e.preventDefault();
 
@@ -342,7 +267,7 @@
 	        }
 
 	        var request = new XMLHttpRequest();
-	        var url = 'https://dp-call-congress.herokuapp.com/create?campaignId=' + state.callCampaign + '&userPhone=' + number + '&source_id=' + getSource();
+	        var url = 'https://dp-call-congress.herokuapp.com/create?campaignId=' + config.campaign + '&userPhone=' + number + '&source_id=' + getSource();
 	        request.open('GET', url, true);
 	        request.send();
 
@@ -435,6 +360,43 @@
 	var PhoneScript = React.createClass({
 	    displayName: 'PhoneScript',
 
+	    onClickSendFeedback: function onClickSendFeedback(e) {
+	        e.preventDefault();
+
+	        var data = {
+	            campaign: config.campaign,
+	            subject: 'Feedback from ' + (config.prettyCampaignName || config.campaign),
+	            text: ''
+	        };
+
+	        var fields = [document.querySelector('#who'), document.querySelector('#how')];
+
+	        fields.forEach(function (field) {
+	            data.text += field.name + ':\n' + field.value + '\n\n';
+	        });
+
+	        var url = urls.feedback;
+
+	        for (var key in data) {
+	            url += key;
+	            url += '=';
+	            url += encodeURIComponent(data[key]);
+	            url += '&';
+	        }
+
+	        ajax.get(url);
+
+	        this.setState({
+	            sent: true
+	        });
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            sent: false
+	        };
+	    },
+
 	    render: function render() {
 	        return React.createElement(
 	            'div',
@@ -454,7 +416,47 @@
 	                '\u201CI am calling because I want you to know how important it is that the people Hillary Clinton appoints to her administration care about the public interest \u2014 and are not just more Wall Street executives and other corporate insiders.\u201D'
 	            ),
 	            React.createElement('div', { className: 'spacer' }),
-	            'If you reach an answering machine, please leave a message. After each call is over, please hit the * key, and we will connect you to somebody else.'
+	            'If you reach an answering machine, please leave a message. After each call is over, please hit the * key, and we will connect you to somebody else.',
+	            React.createElement(
+	                'div',
+	                { className: 'calling-wrapper' },
+	                React.createElement(
+	                    'h3',
+	                    null,
+	                    'After your call(s), use the form to let us know how it went!'
+	                ),
+	                React.createElement(
+	                    'form',
+	                    { action: '#', method: 'get', className: this.state.sent ? 'sent' : false },
+	                    React.createElement(
+	                        'div',
+	                        { className: 'wrapper' },
+	                        React.createElement(
+	                            'h4',
+	                            null,
+	                            'Who did you speak with?'
+	                        ),
+	                        React.createElement('input', { required: 'required', type: 'text', name: 'Who did you speak with?', id: 'who' }),
+	                        React.createElement(
+	                            'h4',
+	                            null,
+	                            'How did it go?'
+	                        ),
+	                        React.createElement('input', { required: 'required', type: 'text', name: 'How did it go?', id: 'how' }),
+	                        React.createElement('br', null),
+	                        React.createElement(
+	                            'div',
+	                            { id: 'thanks' },
+	                            'Thank you!'
+	                        ),
+	                        React.createElement(
+	                            'button',
+	                            { onClick: this.onClickSendFeedback, type: 'submit', name: 'submit' },
+	                            'Send Feedback'
+	                        )
+	                    )
+	                )
+	            )
 	        );
 	    }
 	});
@@ -482,12 +484,8 @@
 	    displayName: 'Form',
 
 	    render: function render() {
-	        var form;
+	        var form = void 0;
 	        switch (this.state.form) {
-	            case 'email':
-	                form = React.createElement(EmailForm, { changeForm: this.changeForm });
-	                break;
-
 	            case 'phone':
 	                form = React.createElement(PhoneForm, { changeForm: this.changeForm });
 	                break;
@@ -665,7 +663,7 @@
 	            shareText += '/?source=' + source;
 	        }
 
-	        var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&ref=rootstrikers';
+	        var url = urls.twitter + encodeURIComponent(shareText) + '&ref=demandprogress';
 
 	        window.open(url);
 	    },
@@ -673,7 +671,7 @@
 	    onClickFacebook: function onClickFacebook(e) {
 	        e.preventDefault();
 
-	        var url = 'https://www.facebook.com/sharer.php?u=http://www.nomorewallstreetinsiders.com/';
+	        var url = urls.facebook + encodeURIComponent(config.link);
 
 	        var source = getSource();
 

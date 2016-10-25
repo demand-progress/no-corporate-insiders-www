@@ -1,10 +1,12 @@
+// Modules
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+// Checking for outdated browsers
 (function() {
-    var isIE = /MSIE (\d+)\./.test(navigator.userAgent);
+    const isIE = /MSIE (\d+)\./.test(navigator.userAgent);
     if (isIE) {
-        var version = +isIE[1];
+        const version = +isIE[1];
         if (version < 10) {
             alert('Unfortunately your browser, Internet Explorer ' + version + ', is not supported.\nPlease visit the site with a modern browser like Firefox or Chrome.\nThanks!');
         }
@@ -15,25 +17,32 @@ const ReactDOM = require('react-dom');
     }
 })();
 
+// Config
+const config = {};
+config.campaign = 'no-corporate-insiders';
+config.link = 'https://nocorporateinsiders.com/';
+config.prettyCampaignName = 'No Corporate Insiders';
 
+// URLs
+const urls = {};
+urls.facebook = 'https://www.facebook.com/sharer.php?u=';
+urls.feedback = 'https://dp-feedback-tool.herokuapp.com/api/v1/feedback?';
+urls.twitter = 'https://twitter.com/intent/tweet?text=';
 
-var state = {};
-state.callCampaign = 'no-more-corporate-insiders';
+// State
+const state = {};
 state.isMobile = /mobile/i.test(navigator.userAgent);
 state.isIE = /trident/i.test(navigator.userAgent);
-state.campaign = 'no_more_wall_street_insiders';
 state.query = getQueryVariables();
 
-
-
 // Setup shortcuts for AJAX.
-var ajax = {
+const ajax = {
     get: function(url, callback) {
         callback = callback || function() {};
 
-        var xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
+            if (xhr.readyState === 4 && callback) {
                 callback(xhr.response);
             }
         };
@@ -44,9 +53,9 @@ var ajax = {
     post: function(url, formData, callback) {
         callback = callback || function() {};
 
-        var xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
+            if (xhr.readyState === 4 && callback) {
                 callback(xhr.response);
             }
         };
@@ -55,9 +64,7 @@ var ajax = {
     },
 };
 
-
-
-var events = {
+const events = {
     list: {},
     on: function(event, callback) {
         if (!this.list[event]) {
@@ -71,20 +78,20 @@ var events = {
             return;
         }
 
-        for (var i = 0; i < this.list[event].length; i++) {
+        for (let i = 0; i < this.list[event].length; i++) {
             this.list[event][i](data);
         }
     },
 };
 
 function getQueryVariables() {
-    var variables = {};
+    const variables = {};
 
-    var queryString = location.search.substr(1);
-    var pairs = queryString.split('&');
+    const queryString = location.search.substr(1);
+    const pairs = queryString.split('&');
 
-    for (var i = 0; i < pairs.length; i++) {
-        var keyValue = pairs[i].split('=');
+    for (let i = 0; i < pairs.length; i++) {
+        const keyValue = pairs[i].split('=');
         variables[keyValue[0]] = keyValue[1];
     }
 
@@ -92,12 +99,12 @@ function getQueryVariables() {
 }
 
 function getSource() {
-    var source = state.query.source || '';
+    const source = state.query.source || '';
     return source.toLowerCase();
 }
 
 function findPos(obj) {
-    var curTop = 0;
+    let curTop = 0;
     if (obj.offsetParent) {
         do {
             curTop += obj.offsetTop;
@@ -109,7 +116,7 @@ function findPos(obj) {
 
 function k() {}
 
-var Header = React.createClass({
+const Header = React.createClass({
     render: function() {
         return (
             <header>
@@ -134,87 +141,7 @@ var Header = React.createClass({
     },
 });
 
-var EmailForm = React.createClass({
-    render: function() {
-        return (
-            <div className="email-form">
-                <form onSubmit={ this.onSubmit } ref="form">
-                    <input className="name" name="name" placeholder="Your name" autoFocus />
-                    <input className="email" name="email" placeholder="Email" type="email" />
-                    <input className="zip" name="zip" placeholder="Zip code" type="tel" />
-                    <button>
-                        Send Now
-                    </button>
-                </form>
-
-                <div className="disclaimer">
-                    We do not share your email address without your permission.
-                    Demand Progress,
-                    Democracy For America,
-                    National People’s Action,
-                    Other 98,
-                    RootsAction, and
-                    Rootstrikers
-                    may send you updates on this and other important campaigns by email. If at any time you would like to unsubscribe from any of these email lists, you may do so.
-                </div>
-            </div>
-        );
-    },
-
-    componentDidMount: function() {
-        // var nameField = this.refs.form.querySelector('.name');
-
-        // if (!state.isMobile && !state.isIE) {
-        //     nameField.focus();
-        // }
-    },
-
-    onSubmit: function(e) {
-        e.preventDefault();
-
-        var form = this.refs.form;
-
-        var name = form.querySelector('[name="name"]');
-        if (!name.value.trim()) {
-            name.focus();
-            alert('Please enter your name.');
-            return;
-        }
-
-        var emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        var email = form.querySelector('[name="email"]');
-        if (!email.value.trim()) {
-            email.focus();
-            alert('Please enter your email.');
-            return;
-        } else if (!emailRegex.test(email.value.trim())) {
-            email.focus();
-            alert('Please enter a valid email.');
-            return;
-        }
-
-        var zip = form.querySelector('[name="zip"]');
-        if (!zip.value.trim()) {
-            zip.focus();
-            alert('Please enter your zip.');
-            return;
-        }
-
-        var data = new FormData();
-        data.append('campaign', state.campaign);
-        data.append('email', email.value.trim());
-        data.append('name', name.value.trim());
-        data.append('optedIn', true);
-        data.append('source', getSource());
-        data.append('userAgent', navigator.userAgent);
-        data.append('zip', zip.value.trim());
-        ajax.post('https://dp-flexible-signature-db.herokuapp.com/sign', data);
-
-        this.props.changeForm('phone');
-    },
-});
-
-var PhoneForm = React.createClass({
+const PhoneForm = React.createClass({
     render: function() {
         return (
             <div>
@@ -246,27 +173,19 @@ var PhoneForm = React.createClass({
         );
     },
 
-    componentDidMount: function() {
-        // var phoneField = this.refs['field-phone'];
-
-        // if (!state.isMobile && !state.isIE) {
-        //     phoneField.focus();
-        // }
-    },
-
     onSubmit: function(e) {
         e.preventDefault();
 
-        var phoneField = this.refs['field-phone'];
-        var number = phoneField.value.replace(/[^\d]/g, '');
+        const phoneField = this.refs['field-phone'];
+        const number = phoneField.value.replace(/[^\d]/g, '');
 
         if (number.length !== 10) {
             phoneField.focus();
             return alert('Please enter your 10 digit phone number.');
         }
 
-        var request = new XMLHttpRequest();
-        var url = `https://dp-call-congress.herokuapp.com/create?campaignId=${state.callCampaign}&userPhone=${number}&source_id=${getSource()}`;
+        const request = new XMLHttpRequest();
+        const url = `https://dp-call-congress.herokuapp.com/create?campaignId=${config.campaign}&userPhone=${number}&source_id=${getSource()}`;
         request.open('GET', url, true);
         request.send();
 
@@ -280,7 +199,7 @@ var PhoneForm = React.createClass({
     },
 });
 
-var OptOutForm = React.createClass({
+const OptOutForm = React.createClass({
     numbers: {
         // 'The Office of the Treasury Secretary': '202-622-1100',
         // 'The Office of the White House Chief of Staff': '202-456-3737',
@@ -303,10 +222,10 @@ var OptOutForm = React.createClass({
     },
 
     renderNumbers: function() {
-        var numbers = [];
+        const numbers = [];
 
-        for (var name in this.numbers) {
-            var number = this.numbers[name];
+        for (let name in this.numbers) {
+            let number = this.numbers[name];
 
             numbers.push(
                 <div className="number">
@@ -339,7 +258,47 @@ var OptOutForm = React.createClass({
     },
 });
 
-var PhoneScript = React.createClass({
+const PhoneScript = React.createClass({
+    onClickSendFeedback: function(e) {
+        e.preventDefault();
+
+        const data = {
+            campaign: config.campaign,
+            subject: 'Feedback from ' + (config.prettyCampaignName || config.campaign),
+            text: '',
+        };
+        
+        const fields = [
+            document.querySelector('#who'),
+            document.querySelector('#how'),
+        ];
+
+        fields.forEach(field => {
+            data.text += `${field.name}:\n${field.value}\n\n`;
+        });
+
+        let url = urls.feedback;
+
+        for (let key in data) {
+            url += key;
+            url += '=';
+            url += encodeURIComponent(data[key]);
+            url += '&';
+        }
+
+        ajax.get(url);
+
+        this.setState({
+            sent: true,
+        });
+    },
+
+    getInitialState: function() {
+        return {
+            sent: false,
+        };
+    },
+
     render: function() {
         return (
             <div className="phone-script">
@@ -357,12 +316,27 @@ var PhoneScript = React.createClass({
                 <div className="spacer" />
 
                 If you reach an answering machine, please leave a message. After each call is over, please hit the * key, and we will connect you to somebody else.
+
+                <div className="calling-wrapper">
+                    <h3>After your call(s), use the form to let us know how it went!</h3>
+                    <form action="#" method="get" className={this.state.sent ? 'sent' : false}>
+                        <div className="wrapper">
+                            <h4>Who did you speak with?</h4>
+                            <input required="required" type="text" name="Who did you speak with?" id="who" />
+                            <h4>How did it go?</h4>
+                            <input required="required" type="text" name="How did it go?" id="how" />
+                            <br />
+                            <div id="thanks">Thank you!</div>
+                            <button onClick={this.onClickSendFeedback} type="submit" name="submit">Send Feedback</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     },
 });
 
-var Thanks = React.createClass({
+const Thanks = React.createClass({
     render: function() {
         return (
             <div className="thanks">
@@ -383,14 +357,10 @@ var Thanks = React.createClass({
     },
 });
 
-var Form = React.createClass({
+const Form = React.createClass({
     render: function() {
-        var form;
+        let form;
         switch (this.state.form) {
-            case 'email':
-            form = <EmailForm changeForm={ this.changeForm } />;
-            break;
-
             case 'phone':
             form = <PhoneForm changeForm={ this.changeForm } />;
             break;
@@ -416,7 +386,7 @@ var Form = React.createClass({
     },
 
     getInitialState: function () {
-        var form = 'phone';
+        let form = 'phone';
 
         if (state.query.call_tool) {
             form = 'phone';
@@ -436,15 +406,15 @@ var Form = React.createClass({
             form: form,
         });
 
-        var pos = findPos(this);
+        const pos = findPos(this);
         scrollTo(0, pos - 16);
     },
 });
 
-var Organizations = React.createClass({
+const Organizations = React.createClass({
     render: function() {
-        var organizations = [];
-        for (var name in this.organizations) {
+        const organizations = [];
+        for (let name in this.organizations) {
             organizations.push(
                 <a
                     href={ this.organizations[name] }
@@ -473,7 +443,7 @@ var Organizations = React.createClass({
     },
 });
 
-var Contact = React.createClass({
+const Contact = React.createClass({
     render: function() {
         return (
             <div className="contact">
@@ -485,7 +455,7 @@ var Contact = React.createClass({
     },
 });
 
-var CreativeCommons = React.createClass({
+const CreativeCommons = React.createClass({
     render: function() {
         return (
             <div className="creative-commons">
@@ -495,7 +465,7 @@ var CreativeCommons = React.createClass({
     },
 });
 
-var Social = React.createClass({
+const Social = React.createClass({
     render: function() {
         return (
             <div className="social">
@@ -514,18 +484,17 @@ var Social = React.createClass({
     onClickTwitter: function(e) {
         e.preventDefault();
 
-        var shareText = document.querySelector('[name="twitter:description"]').content;
+        let shareText = document.querySelector('[name="twitter:description"]').content;
 
-        var source = getSource();
+        const source = getSource();
 
         if (source) {
             shareText += '/?source=' + source;
         }
 
-        var url =
-            'https://twitter.com/intent/tweet?text=' +
-            encodeURIComponent(shareText) +
-            '&ref=rootstrikers';
+        const url = urls.twitter +
+                  encodeURIComponent(shareText) +
+                  '&ref=demandprogress';
 
         window.open(url);
     },
@@ -533,10 +502,9 @@ var Social = React.createClass({
     onClickFacebook: function(e) {
         e.preventDefault();
 
-        var url =
-            'https://www.facebook.com/sharer.php?u=http://www.nomorewallstreetinsiders.com/';
+        let url = urls.facebook + encodeURIComponent(config.link);
 
-        var source = getSource();
+        const source = getSource();
 
         if (source) {
             url += '%3Fsource%3D' + source;
@@ -546,7 +514,7 @@ var Social = React.createClass({
     },
 });
 
-var CallPages = React.createClass({
+const CallPages = React.createClass({
     render: function() {
         return (
             <div className="wrapper">
@@ -568,8 +536,8 @@ var CallPages = React.createClass({
     ],
 
     componentDidMount: function() {
-        for (var i = 0; i < this.imagesToPreload.length; i++) {
-            var image = new Image();
+        for (let i = 0; i < this.imagesToPreload.length; i++) {
+            const image = new Image();
             image.src = this.imagesToPreload[i];
         }
     },
