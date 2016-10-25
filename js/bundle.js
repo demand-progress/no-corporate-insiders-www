@@ -302,7 +302,7 @@
 	        // 'The Domestic Policy Council': '202-456-6515',
 	        // 'The Office of Administration': '202-456-2861',
 	        // 'The Council of Economic Advisers': '202-395-5084',
-	        'The White House Comment Line': '202-456-1111'
+	        'Hillary Clinton\'s Campaign': '646-854-1432'
 	    },
 
 	    renderNumbers: function renderNumbers() {
@@ -345,7 +345,7 @@
 	                React.createElement(
 	                    'span',
 	                    { className: 'suggestion' },
-	                    '\u201CIt\u2019s outrageous that the White House is considering naming more Wall Street insiders to the SEC. We need tough \u2018cops on the beat\u2019 who will enforce the laws on the big banks, not revolving door picks who will let Wall Street off the hook. President Obama must not name a Wall Street insider like Keir Gumbs or Anne Small to the SEC.\u201D'
+	                    '\u201CI am calling because I want you to know how important it is that the people Hillary Clinton appoints to her administration care about the public interest \u2014 and are not just more Wall Street executives and other corporate insiders.\u201D'
 	                )
 	            ),
 	            React.createElement(
