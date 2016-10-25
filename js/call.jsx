@@ -167,7 +167,7 @@ const PhoneForm = React.createClass({
                         maxWidth: '860px',
                     }}
                 >
-                    Please enter your number above and we will give you a script and connect you to key members of Clinton'stransition team so you can tell them to make sure the administration doesn't hire corporate insiders.
+                    Please enter your number above and we will give you a script and connect you to key members of Clinton's transition team so you can tell them to make sure the administration doesn't hire corporate insiders.
                 </div>
             </div>
         );
@@ -521,8 +521,6 @@ const CallPages = React.createClass({
                 <Header />
 
                 <Form />
-
-                <Social />
 
                 <Contact />
 
