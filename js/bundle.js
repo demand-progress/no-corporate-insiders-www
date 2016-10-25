@@ -581,12 +581,6 @@
 	            React.createElement('br', null),
 	            React.createElement(
 	                'a',
-	                { href: 'tel:202-630-0299' },
-	                '202-630-0299'
-	            ),
-	            ' or ',
-	            React.createElement(
-	                'a',
 	                { href: 'mailto:press@rootstrikers.org' },
 	                'press@rootstrikers.org'
 	            )
@@ -692,8 +686,7 @@
 	            { className: 'wrapper' },
 	            React.createElement(Header, null),
 	            React.createElement(Form, null),
-	            React.createElement(Contact, null),
-	            React.createElement(CreativeCommons, null)
+	            React.createElement(Contact, null)
 	        );
 	    },
 

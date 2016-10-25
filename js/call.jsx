@@ -449,7 +449,7 @@ const Contact = React.createClass({
             <div className="contact">
                 For press inquiries, please contact us at:
                 <br />
-                <a href="tel:202-630-0299">202-630-0299</a> or <a href="mailto:press@rootstrikers.org">press@rootstrikers.org</a>
+                <a href="mailto:press@rootstrikers.org">press@rootstrikers.org</a>
             </div>
         );
     },
@@ -523,8 +523,6 @@ const CallPages = React.createClass({
                 <Form />
 
                 <Contact />
-
-                <CreativeCommons />
             </div>
         );
     },
