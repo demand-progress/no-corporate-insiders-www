@@ -147,7 +147,7 @@
 	}
 
 	function getSource() {
-	    var source = state.query.source || '';
+	    var source = state.query.source || 'website';
 	    return source.toLowerCase();
 	}
 

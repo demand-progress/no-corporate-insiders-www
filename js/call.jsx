@@ -99,7 +99,7 @@ function getQueryVariables() {
 }
 
 function getSource() {
-    const source = state.query.source || '';
+    const source = state.query.source || 'website';
     return source.toLowerCase();
 }
 
